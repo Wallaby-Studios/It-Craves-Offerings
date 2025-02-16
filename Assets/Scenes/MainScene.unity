@@ -1354,30 +1354,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4102081663562795446, guid: 7a44ee491312a5b4abc4ff2805dd4579, type: 3}
-      propertyPath: m_Actions
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4213050487345766838, guid: 7a44ee491312a5b4abc4ff2805dd4579, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4213050487345766838, guid: 7a44ee491312a5b4abc4ff2805dd4579, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4213050487345766838, guid: 7a44ee491312a5b4abc4ff2805dd4579, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6425294584959933981, guid: 7a44ee491312a5b4abc4ff2805dd4579, type: 3}
-      propertyPath: playerControls.m_Name
-      value: Player Controls
-      objectReference: {fileID: 0}
-    - target: {fileID: 8205563773649616598, guid: 7a44ee491312a5b4abc4ff2805dd4579, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
