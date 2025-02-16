@@ -64,16 +64,22 @@ public class RoomManager : MonoBehaviour
 
     private void SetupDoors() {
         if(currentRoomCount < 9) {
+            // For any room before the 8th room, show all doors and lock them if the current room is a combat room
             foreach(GameObject door in nonBossDoors) {
                 door.SetActive(true);
+                //door.GetComponent<Door>().Unlocked = currentRoomType != RoomType.Combat;
             }
             bossDoor.SetActive(false);
         } else if(currentRoomCount == 9) {
+            // For the 9th room, hide all non-boss doors 
             foreach(GameObject door in nonBossDoors) {
                 door.SetActive(false);
             }
+            // Show the boss door and lock it only if the 9th room is a combat room
             bossDoor.SetActive(true);
+            //bossDoor.GetComponent<Door>().Unlocked = currentRoomType != RoomType.Combat;
         } else {
+            // For the 10th room, hide all doors
             foreach(GameObject door in nonBossDoors) {
                 door.SetActive(false);
             }
