@@ -43,6 +43,6 @@ public class PlayerControls : MonoBehaviour
     }
 
     void Fire(InputAction.CallbackContext context) {
-        GameManager.instance.player.Fire();
+        GetComponent<Player>().Fire();
     }
 }
