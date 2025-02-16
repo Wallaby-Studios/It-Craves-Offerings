@@ -915,6 +915,7 @@ MonoBehaviour:
   mainMenuUIParent: {fileID: 211799671}
   gameUIParent: {fileID: 1257342025}
   gameEndUIParent: {fileID: 249335820}
+  playerButton: {fileID: 8871156236155421725}
 --- !u!114 &601233008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2198,6 +2199,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4294709621996862737, guid: 04c76f575e9cb8841a86df0e21b377a5, type: 3}
   m_PrefabInstance: {fileID: 8871156236155421723}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8871156236155421725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5819248386522440961, guid: 04c76f575e9cb8841a86df0e21b377a5, type: 3}
+  m_PrefabInstance: {fileID: 8871156236155421723}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
