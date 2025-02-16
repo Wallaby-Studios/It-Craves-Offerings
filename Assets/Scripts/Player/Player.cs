@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerControls controls;
     private float currentHealth;
+    private float currentFireTimer;
 
     private Vector2 moveDirection, lookPosition;
 
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     void Start() {
         controls = GetComponent<PlayerControls>();
         currentHealth = maxHealth;
+        currentFireTimer = 0f;
     }
 
     private void Update() {
@@ -37,18 +39,25 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(
             moveDirection.x * moveSpeed * Time.deltaTime, 
             moveDirection.y * moveSpeed * Time.deltaTime);
+
+        currentFireTimer += Time.deltaTime;
     }
 
     public void Fire() {
-        Vector3 projectilePosition = transform.position + playerAim.Direction;
-        GameObject projectile = Instantiate(projectilePrefab, projectilePosition, Quaternion.identity, GameManager.instance.projectilesParent);
-        // Give the projectile damage
-        projectile.GetComponent<Projectile>().damage = damage;
-        // Apply a force to the projectile (in the direction it was fired)
-        Vector2 projectileForce = playerAim.Direction;
-        projectileForce.Normalize();
-        projectileForce *= projectileSpeed;
-        projectile.GetComponent<Rigidbody2D>().AddForce(projectileForce);
+        if(currentFireTimer >= attackTime) {
+            // Reset timer
+            currentFireTimer = 0f;
+
+            Vector3 projectilePosition = transform.position + playerAim.Direction;
+            GameObject projectile = Instantiate(projectilePrefab, projectilePosition, Quaternion.identity, GameManager.instance.projectilesParent);
+            // Give the projectile damage
+            projectile.GetComponent<Projectile>().damage = damage;
+            // Apply a force to the projectile (in the direction it was fired)
+            Vector2 projectileForce = playerAim.Direction;
+            projectileForce.Normalize();
+            projectileForce *= projectileSpeed;
+            projectile.GetComponent<Rigidbody2D>().AddForce(projectileForce);
+        }
     }
 
     public void TakeDamage(float amount) {
