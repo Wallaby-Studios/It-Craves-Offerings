@@ -109,14 +109,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646135650835169264}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.12100406, w: 0.99265206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8384529715934814813}
   m_Father: {fileID: 1137291023817492431}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1426.1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4331786932694385195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,8 +368,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAim: {fileID: 4331786932694385195}
+  projectilePrefab: {fileID: 2372424437940126768, guid: 70e7319825d717d47a66d8ad047b3128, type: 3}
   moveSpeed: 200
   health: 10
   damage: 2
   attackTime: 2
-  projectileSpeed: 400
+  projectileSpeed: 600

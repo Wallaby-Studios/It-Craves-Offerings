@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
 {
+    private Vector3 direction;
+
+    public Vector3 Direction { get { return direction; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +27,11 @@ public class PlayerAim : MonoBehaviour
         worldLookPosition.z = 0f;
         
         // Find the direction between the look position and player 
-        Vector3 direction = worldLookPosition - transform.position;
-        direction.Normalize();
+        Vector3 newDirection = worldLookPosition - transform.position;
+        newDirection.Normalize();
 
         // Rotate the object by setting its up vector 
-        transform.up = direction;
+        transform.up = newDirection;
+        direction = newDirection;
     }
 }

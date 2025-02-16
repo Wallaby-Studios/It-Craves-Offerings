@@ -21,8 +21,9 @@ public class PlayerControls : MonoBehaviour
         move.Enable();
         look = playerInputControls.Player.Look;
         look.Enable();
-        fire = playerInputControls.Player.Move;
+        fire = playerInputControls.Player.Fire;
         fire.Enable();
+        fire.performed += Fire;
     }
 
     private void OnDisable() {
@@ -33,11 +34,15 @@ public class PlayerControls : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-
+        
     }
 
     // Update is called once per frame
     void Update() {
         
+    }
+
+    void Fire(InputAction.CallbackContext context) {
+        GameManager.instance.player.Fire();
     }
 }

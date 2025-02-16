@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerAim playerAim;
     [SerializeField]
+    private GameObject projectilePrefab;
+    [SerializeField]
     private float moveSpeed, health, damage, attackTime, projectileSpeed;
 
     private Rigidbody2D rb;
@@ -30,6 +32,17 @@ public class Player : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed * Time.deltaTime, moveDirection.y * moveSpeed * Time.deltaTime);
+        rb.velocity = new Vector2(
+            moveDirection.x * moveSpeed * Time.deltaTime, 
+            moveDirection.y * moveSpeed * Time.deltaTime);
+    }
+
+    public void Fire() {
+        Vector3 projectilePosition = transform.position + playerAim.Direction;
+        GameObject projectile = Instantiate(projectilePrefab, projectilePosition, Quaternion.identity, GameManager.instance.projectilesParent);
+        Vector2 projectileForce = playerAim.Direction;
+        projectileForce.Normalize();
+        projectileForce *= projectileSpeed;
+        projectile.GetComponent<Rigidbody2D>().AddForce(projectileForce);
     }
 }
