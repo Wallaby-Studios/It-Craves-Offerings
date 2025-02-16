@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum RoomType {
     Combat,
-    Healing,
-    Offering,
+    Heal,
+    Upgrade,
     Boss
 }
 

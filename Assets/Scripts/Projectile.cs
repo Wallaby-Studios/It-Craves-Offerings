@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public float damage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.collider != null) {
             if(collision.gameObject.tag == "Player") {
-                // Do damage here
+                collision.gameObject.GetComponent<Player>().TakeDamage(damage);
             }
 
             Destroy(gameObject);

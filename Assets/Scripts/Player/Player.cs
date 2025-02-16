@@ -40,9 +40,25 @@ public class Player : MonoBehaviour
     public void Fire() {
         Vector3 projectilePosition = transform.position + playerAim.Direction;
         GameObject projectile = Instantiate(projectilePrefab, projectilePosition, Quaternion.identity, GameManager.instance.projectilesParent);
+        // Give the projectile damage
+        projectile.GetComponent<Projectile>().damage = damage;
+        // Apply a force to the projectile (in the direction it was fired)
         Vector2 projectileForce = playerAim.Direction;
         projectileForce.Normalize();
         projectileForce *= projectileSpeed;
         projectile.GetComponent<Rigidbody2D>().AddForce(projectileForce);
+    }
+
+    public void TakeDamage(float amount) {
+        if(amount < 0) {
+            return;
+        }
+
+        health -= amount;
+
+        if(health < 0) {
+            Debug.Log("Player Killed. Game Over!");
+            Destroy(gameObject);
+        }
     }
 }
