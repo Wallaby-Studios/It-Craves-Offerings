@@ -6,8 +6,11 @@ public class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
 
+    //inspector variables
     public float moveSpeed = 3;
+    //enemy points at this transform each frame
     public Transform target;
+    //enemy's targeting child obj
     public GameObject anchor;
 
     enum Behavior
@@ -19,27 +22,29 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     Behavior currentBehavior;
 
+    //determines Wander movement dir
     float xMov;
     float yMov;
 
+    //for dir changs on Wander state
     float timeSinceLastChange = 0;
     float cooldown = 1;
+
     // Start is called before the first frame update
     void Start()
     {
+        moveSpeed = Random.Range(2, 3);
+        //PickRandomBehavior();
+        currentBehavior = Behavior.Wander;
 
-        PickRandomBehavior();
+        PickNewDirection();
 
-        yMov = 1;
-        xMov = 1;
-
-        cooldown = Random.Range(0.75f, 1.5f);
+        cooldown = Random.Range(1.5f, 3f);
 
         timeSinceLastChange = cooldown;
 
         rb = GetComponent<Rigidbody2D>();
-        //pick new direction to move in randomly
-        //PickNewDirection();
+
     }
 
     // Update is called once per frame
@@ -51,22 +56,26 @@ public class Enemy : MonoBehaviour
 
     public void Wander()
     {
+        timeSinceLastChange += Time.deltaTime;
+
         Vector2 mov = new Vector2(xMov, yMov).normalized;
         rb.velocity = mov * moveSpeed;
 
-        timeSinceLastChange += Time.deltaTime;
         if (timeSinceLastChange >= cooldown)
         {
             PickNewDirection();
             timeSinceLastChange = 0;
+            cooldown = Random.Range(1.5f, 3f);
         }
     }
 
     public void RushAtTarget()
     {
+        //get dir to target
         Vector2 targetDir = (target.transform.position - transform.position).normalized;
-        rb.velocity = targetDir * moveSpeed;
 
+        //rush directly at it
+        rb.velocity = targetDir * moveSpeed;
     }
 
     public void PerformBehavior()
@@ -83,12 +92,12 @@ public class Enemy : MonoBehaviour
 
     public void LookAtTarget()
     {
+        //force aiming anchor to look at target transform
         anchor.transform.up = (target.transform.position - anchor.transform.position);
     }
 
     public void PickNewDirection()
-    {
-
+    { 
         xMov = Random.Range(-1, 1);
         yMov = Random.Range(-1, 1);
         
@@ -106,5 +115,18 @@ public class Enemy : MonoBehaviour
         {
             currentBehavior = Behavior.Wander;
         }
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Projectile>() == null)
+        {
+            Vector2 dirOfHit = collision.contacts[0].point  - (Vector2)transform.position;
+            xMov = -dirOfHit.x;
+            yMov = -dirOfHit.y;
+            cooldown = 3f;
+            timeSinceLastChange = 0;
+        }
+        
     }
 }
