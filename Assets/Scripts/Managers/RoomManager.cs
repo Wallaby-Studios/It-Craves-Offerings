@@ -29,10 +29,6 @@ public class RoomManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private RoomType currentRoomType;
-    [SerializeField]
-    private int currentRoomCount;
-    [SerializeField]
     private Transform playerSpawnPosition;
     // Doors
     [SerializeField]
@@ -41,7 +37,12 @@ public class RoomManager : MonoBehaviour
     private GameObject bossDoor;
     // Room Objects
     [SerializeField]
+    private Transform roomObjectsParent;
+    [SerializeField]
     private GameObject healthPickupPrefab;
+
+    private RoomType currentRoomType;
+    private int currentRoomCount;
 
     // Start is called before the first frame update
     void Start()
@@ -63,10 +64,16 @@ public class RoomManager : MonoBehaviour
         currentRoomCount++;
         GameManager.instance.player.transform.position = playerSpawnPosition.position;
 
+        // Destroy all objects in the room
+        for(int i = roomObjectsParent.childCount - 1; i >= 0; i--) {
+            Destroy(roomObjectsParent.GetChild(i).gameObject);
+        }
+
         SetupDoors();
 
+        // Spawn a health pickup if the new room is a healing room
         if(currentRoomType == RoomType.Heal) {
-            Instantiate(healthPickupPrefab);
+            Instantiate(healthPickupPrefab, roomObjectsParent.transform);
         }
     }
 

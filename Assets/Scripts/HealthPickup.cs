@@ -20,9 +20,8 @@ public class HealthPickup : MonoBehaviour
         if(collision.collider != null) {
             if(collision.gameObject.tag == "Player") {
                 collision.gameObject.GetComponent<Player>().Heal();
+                Destroy(gameObject);
             }
-
-            Destroy(gameObject);
         }
     }
 }

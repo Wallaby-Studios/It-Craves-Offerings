@@ -274,14 +274,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d277cfad247bf4a887df9766dd4f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRoomType: 0
-  currentRoomCount: 0
   playerSpawnPosition: {fileID: 1877651764}
   nonBossDoors:
   - {fileID: 159553124}
   - {fileID: 1511319871}
   - {fileID: 2105071742}
   bossDoor: {fileID: 1567464507}
+  roomObjectsParent: {fileID: 2013006576}
   healthPickupPrefab: {fileID: 1287816427797664197, guid: eb478c0fedd3bfc4c904603e08169168, type: 3}
 --- !u!114 &306171476
 MonoBehaviour:
@@ -1324,6 +1323,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2013006575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2013006576}
+  m_Layer: 0
+  m_Name: roomObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2013006576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013006575}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2075822759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,3 +1401,4 @@ SceneRoots:
   - {fileID: 1877651764}
   - {fileID: 661778257}
   - {fileID: 139263211}
+  - {fileID: 2013006576}
