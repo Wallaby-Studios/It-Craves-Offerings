@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
         currentHealth -= amount;
 
         if(currentHealth < 0) {
-            Debug.Log("Player Killed. Game Over!");
+            GameManager.instance.ChangeGameState(GameState.GameEnd);
             Destroy(gameObject);
         }
     }

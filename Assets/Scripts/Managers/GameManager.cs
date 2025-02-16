@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{
+    MainMenu,
+    Game,
+    GameEnd
+}
+
 public enum Stat {
     MoveSpeed, 
     Health, 
@@ -32,15 +39,26 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Transform projectilesParent;
 
+    private GameState currentGameState;
+
+    public GameState CurrentGameState { get { return currentGameState; } }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        ChangeGameState(GameState.MainMenu);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void ChangeGameState(GameState newGameState) {
+        switch(newGameState) {
+            case GameState.MainMenu:
+                break;
+            case GameState.Game:
+                break;
+            case GameState.GameEnd:
+                break;
+        }
+
+        currentGameState = newGameState;
     }
 }
