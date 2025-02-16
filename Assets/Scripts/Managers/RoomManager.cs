@@ -28,8 +28,11 @@ public class RoomManager : MonoBehaviour
     }
     #endregion
 
+    // Spawn Positions
     [SerializeField]
     private Transform playerSpawnPosition;
+    [SerializeField]
+    private List<Transform> pickupSpawnPositions;
     // Doors
     [SerializeField]
     private List<GameObject> nonBossDoors;
@@ -39,7 +42,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField]
     private Transform roomObjectsParent;
     [SerializeField]
-    private GameObject healthPickupPrefab;
+    private GameObject healthPickupPrefab, upgradePickupPrefab;
 
     private RoomType currentRoomType;
     private int currentRoomCount;
@@ -71,9 +74,22 @@ public class RoomManager : MonoBehaviour
 
         SetupDoors();
 
-        // Spawn a health pickup if the new room is a healing room
-        if(currentRoomType == RoomType.Heal) {
-            Instantiate(healthPickupPrefab, roomObjectsParent.transform);
+        switch(currentRoomType) {
+            case RoomType.Combat:
+                break;
+            case RoomType.Heal:
+                // Spawn a health pickup if the new room is a healing room
+                Instantiate(healthPickupPrefab, pickupSpawnPositions[1].position, Quaternion.identity, roomObjectsParent.transform);
+                break;
+            case RoomType.Upgrade:
+                // Spawn 3 upgrade pickups if the new room is an upgrade room
+                for(int i = 0; i < pickupSpawnPositions.Count; i++) {
+                    GameObject upgradePickUp = Instantiate(upgradePickupPrefab, pickupSpawnPositions[i].position, Quaternion.identity, roomObjectsParent.transform);
+                    upgradePickUp.GetComponent<UpgradePickup>().RandomizeStats((UpgradeTier)i);
+                }
+                break;
+            case RoomType.Boss:
+                break;
         }
     }
 

@@ -9,12 +9,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject projectilePrefab;
     [SerializeField]
+    private float baseMoveSpeed, baseMaxHealth, baseDamage, baseAttackTime, baseProjectileSpeed;
+    [SerializeField]
     private float moveSpeed, maxHealth, damage, attackTime, projectileSpeed;
+    [SerializeField]
+    private float currentHealth, currentFireTimer;
 
     private Rigidbody2D rb;
     private PlayerControls controls;
-    private float currentHealth;
-    private float currentFireTimer;
 
     private Vector2 moveDirection, lookPosition;
 
@@ -23,9 +25,16 @@ public class Player : MonoBehaviour
     }
 
     void Start() {
-        controls = GetComponent<PlayerControls>();
+        moveSpeed = baseMoveSpeed;
+        maxHealth = baseMaxHealth;
+        damage = baseDamage;
+        attackTime = baseAttackTime;
+        projectileSpeed = baseProjectileSpeed;
+
         currentHealth = maxHealth;
         currentFireTimer = 0f;
+
+        controls = GetComponent<PlayerControls>();
     }
 
     private void Update() {
@@ -75,5 +84,27 @@ public class Player : MonoBehaviour
 
     public void Heal() {
         currentHealth = maxHealth;
+    }
+
+    public void Buff(Stat stat, float statChangeAmount) {
+        switch(stat) {
+            case Stat.MoveSpeed:
+                moveSpeed *= statChangeAmount;
+                break;
+            case Stat.Health:
+                maxHealth *= statChangeAmount;
+                currentHealth *= statChangeAmount;
+                break;
+            case Stat.Damage:
+                damage *= statChangeAmount;
+                break;
+            case Stat.AttackTime:
+                // Invert the value since a shorter attack time is better
+                attackTime *= (1f / statChangeAmount);
+                break;
+            case Stat.ProjectileSpeed:
+                projectileSpeed *= statChangeAmount;
+                break;
+        }
     }
 }

@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Stat {
+    MoveSpeed, 
+    Health, 
+    Damage, 
+    AttackTime, 
+    ProjectileSpeed
+}
+
 public class GameManager : MonoBehaviour
 {
     #region Singleton Code

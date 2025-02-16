@@ -369,8 +369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAim: {fileID: 4331786932694385195}
   projectilePrefab: {fileID: 2372424437940126768, guid: 70e7319825d717d47a66d8ad047b3128, type: 3}
-  moveSpeed: 200
-  maxHealth: 10
-  damage: 2
-  attackTime: 0.5
-  projectileSpeed: 600
+  baseMoveSpeed: 200
+  baseMaxHealth: 10
+  baseDamage: 2
+  baseAttackTime: 0.5
+  baseProjectileSpeed: 400
