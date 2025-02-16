@@ -282,6 +282,7 @@ MonoBehaviour:
   - {fileID: 1511319871}
   - {fileID: 2105071742}
   bossDoor: {fileID: 1567464507}
+  healthPickupPrefab: {fileID: 1287816427797664197, guid: eb478c0fedd3bfc4c904603e08169168, type: 3}
 --- !u!114 &306171476
 MonoBehaviour:
   m_ObjectHideFlags: 0

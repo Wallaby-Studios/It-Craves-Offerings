@@ -33,11 +33,15 @@ public class RoomManager : MonoBehaviour
     [SerializeField]
     private int currentRoomCount;
     [SerializeField]
-    Transform playerSpawnPosition;
+    private Transform playerSpawnPosition;
+    // Doors
     [SerializeField]
-    List<GameObject> nonBossDoors;
+    private List<GameObject> nonBossDoors;
     [SerializeField]
-    GameObject bossDoor;
+    private GameObject bossDoor;
+    // Room Objects
+    [SerializeField]
+    private GameObject healthPickupPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +64,10 @@ public class RoomManager : MonoBehaviour
         GameManager.instance.player.transform.position = playerSpawnPosition.position;
 
         SetupDoors();
+
+        if(currentRoomType == RoomType.Heal) {
+            Instantiate(healthPickupPrefab);
+        }
     }
 
     private void SetupDoors() {

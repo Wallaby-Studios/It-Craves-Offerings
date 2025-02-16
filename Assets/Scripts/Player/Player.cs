@@ -9,10 +9,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject projectilePrefab;
     [SerializeField]
-    private float moveSpeed, health, damage, attackTime, projectileSpeed;
+    private float moveSpeed, maxHealth, damage, attackTime, projectileSpeed;
 
     private Rigidbody2D rb;
     private PlayerControls controls;
+    private float currentHealth;
 
     private Vector2 moveDirection, lookPosition;
 
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
 
     void Start() {
         controls = GetComponent<PlayerControls>();
+        currentHealth = maxHealth;
     }
 
     private void Update() {
@@ -54,11 +56,15 @@ public class Player : MonoBehaviour
             return;
         }
 
-        health -= amount;
+        currentHealth -= amount;
 
-        if(health < 0) {
+        if(currentHealth < 0) {
             Debug.Log("Player Killed. Game Over!");
             Destroy(gameObject);
         }
+    }
+
+    public void Heal() {
+        currentHealth = maxHealth;
     }
 }
