@@ -60,5 +60,6 @@ public class GameManager : MonoBehaviour
         }
 
         currentGameState = newGameState;
+        UIManager.instance.ChangeUIState(currentGameState);
     }
 }

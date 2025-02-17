@@ -50,8 +50,10 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PerformBehavior();
-        LookAtTarget();
+        if(GameManager.instance.CurrentGameState == GameState.Game) {
+            PerformBehavior();
+            LookAtTarget();
+        }
     }
 
     public void Wander()

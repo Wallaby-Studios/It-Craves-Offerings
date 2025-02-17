@@ -38,10 +38,12 @@ public class Player : MonoBehaviour
     }
 
     private void Update() {
-        moveDirection = controls.MoveDirection;
-        lookPosition = controls.LookPosition;
+        if(GameManager.instance.CurrentGameState == GameState.Game) {
+            moveDirection = controls.MoveDirection;
+            lookPosition = controls.LookPosition;
 
-        playerAim.UpdateAim(lookPosition);
+            playerAim.UpdateAim(lookPosition);
+        }
     }
 
     private void FixedUpdate() {
