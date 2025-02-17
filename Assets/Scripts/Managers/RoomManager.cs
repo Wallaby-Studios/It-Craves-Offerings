@@ -46,12 +46,16 @@ public class RoomManager : MonoBehaviour
 
     private RoomType currentRoomType;
     private int currentRoomCount;
+    private int roomsBeforeBossRoom;
+
+    public int RoomsBeforeBossRoom { get { return roomsBeforeBossRoom; } }
 
     // Start is called before the first frame update
     void Start()
     {
         currentRoomType = RoomType.Combat;
         currentRoomCount = 0;
+        roomsBeforeBossRoom = 10;
 
         SetupDoors();
     }
@@ -73,6 +77,7 @@ public class RoomManager : MonoBehaviour
         }
 
         SetupDoors();
+        UIManager.instance.UpdateBossCountdownText(roomsBeforeBossRoom - currentRoomCount);
 
         switch(currentRoomType) {
             case RoomType.Combat:
@@ -94,14 +99,14 @@ public class RoomManager : MonoBehaviour
     }
 
     private void SetupDoors() {
-        if(currentRoomCount < 9) {
+        if(currentRoomCount < roomsBeforeBossRoom - 1) {
             // For any room before the 8th room, show all doors and lock them if the current room is a combat room
             foreach(GameObject door in nonBossDoors) {
                 door.SetActive(true);
                 //door.GetComponent<Door>().Unlocked = currentRoomType != RoomType.Combat;
             }
             bossDoor.SetActive(false);
-        } else if(currentRoomCount == 9) {
+        } else if(currentRoomCount == roomsBeforeBossRoom - 1) {
             // For the 9th room, hide all non-boss doors 
             foreach(GameObject door in nonBossDoors) {
                 door.SetActive(false);
