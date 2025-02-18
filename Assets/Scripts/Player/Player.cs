@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Stat {
+    MoveSpeed,
+    MaxHealth,
+    Damage,
+    AttackTime,
+    ProjectileSpeed
+}
+
 public class Player : MonoBehaviour
 {
     [SerializeField]
@@ -11,27 +19,30 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float baseMoveSpeed, baseMaxHealth, baseDamage, baseAttackTime, baseProjectileSpeed;
     [SerializeField]
-    private float moveSpeed, maxHealth, damage, attackTime, projectileSpeed;
-    [SerializeField]
     private float currentHealth, currentFireTimer;
 
+    private Dictionary<Stat, float> stats;
     private Rigidbody2D rb;
     private PlayerControls controls;
 
     private Vector2 moveDirection, lookPosition;
+
+    public Dictionary<Stat, float> Stats { get { return stats; } }
+    public float CurrentHealth { get { return currentHealth; } }
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Start() {
-        moveSpeed = baseMoveSpeed;
-        maxHealth = baseMaxHealth;
-        damage = baseDamage;
-        attackTime = baseAttackTime;
-        projectileSpeed = baseProjectileSpeed;
+        stats = new Dictionary<Stat, float>();
+        stats.Add(Stat.MaxHealth, baseMaxHealth);
+        stats.Add(Stat.MoveSpeed, baseMoveSpeed);
+        stats.Add(Stat.Damage, baseDamage);
+        stats.Add(Stat.AttackTime, baseAttackTime);
+        stats.Add(Stat.ProjectileSpeed, baseProjectileSpeed);
 
-        currentHealth = maxHealth;
+        currentHealth = stats[Stat.MaxHealth];
         currentFireTimer = 0f;
 
         controls = GetComponent<PlayerControls>();
@@ -48,25 +59,25 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate() {
         rb.velocity = new Vector2(
-            moveDirection.x * moveSpeed * Time.deltaTime, 
-            moveDirection.y * moveSpeed * Time.deltaTime);
+            moveDirection.x * stats[Stat.MoveSpeed] * Time.deltaTime, 
+            moveDirection.y * stats[Stat.MoveSpeed] * Time.deltaTime);
 
         currentFireTimer += Time.deltaTime;
     }
 
     public void Fire() {
-        if(currentFireTimer >= attackTime) {
+        if(currentFireTimer >= stats[Stat.AttackTime]) {
             // Reset timer
             currentFireTimer = 0f;
 
             Vector3 projectilePosition = transform.position + playerAim.Direction;
             GameObject projectile = Instantiate(projectilePrefab, projectilePosition, Quaternion.identity, GameManager.instance.projectilesParent);
             // Give the projectile damage
-            projectile.GetComponent<Projectile>().damage = damage;
+            projectile.GetComponent<Projectile>().damage = stats[Stat.Damage];
             // Apply a force to the projectile (in the direction it was fired)
             Vector2 projectileForce = playerAim.Direction;
             projectileForce.Normalize();
-            projectileForce *= projectileSpeed;
+            projectileForce *= stats[Stat.ProjectileSpeed];
             projectile.GetComponent<Rigidbody2D>().AddForce(projectileForce);
         }
     }
@@ -78,6 +89,8 @@ public class Player : MonoBehaviour
 
         currentHealth -= amount;
 
+        UIManager.instance.UpdateStats();
+
         if(currentHealth < 0) {
             GameManager.instance.ChangeGameState(GameState.GameEnd);
             Destroy(gameObject);
@@ -85,28 +98,31 @@ public class Player : MonoBehaviour
     }
 
     public void Heal() {
-        currentHealth = maxHealth;
+        currentHealth = baseMaxHealth;
+        UIManager.instance.UpdateStats();
     }
 
     public void Buff(Stat stat, float statChangeAmount) {
         switch(stat) {
             case Stat.MoveSpeed:
-                moveSpeed *= statChangeAmount;
+                stats[Stat.MoveSpeed] *= statChangeAmount;
                 break;
-            case Stat.Health:
-                maxHealth *= statChangeAmount;
+            case Stat.MaxHealth:
+                stats[Stat.MaxHealth] *= statChangeAmount;
                 currentHealth *= statChangeAmount;
                 break;
             case Stat.Damage:
-                damage *= statChangeAmount;
+                stats[Stat.Damage] *= statChangeAmount;
                 break;
             case Stat.AttackTime:
                 // Invert the value since a shorter attack time is better
-                attackTime *= (1f / statChangeAmount);
+                stats[Stat.AttackTime] *= (1f / statChangeAmount);
                 break;
             case Stat.ProjectileSpeed:
-                projectileSpeed *= statChangeAmount;
+                stats[Stat.ProjectileSpeed] *= statChangeAmount;
                 break;
         }
+
+        UIManager.instance.UpdateStats();
     }
 }

@@ -26,14 +26,17 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject mainMenuUIParent, gameUIParent, gameEndUIParent;
     [SerializeField]
-    private Button playerButton;
+    private Button playButton, gameEndToMainMenuButton;
     [SerializeField]
     private TMP_Text bossCountdownText;
+    [SerializeField]
+    private TMP_Text healthText, moveSpeedText, damageText, attackTimeText, projectileSpeedText;
 
     // Start is called before the first frame update
     void Start()
     {
         SetupButtons();
+        UpdateStats();
     }
 
     // Update is called once per frame
@@ -53,6 +56,7 @@ public class UIManager : MonoBehaviour
                 mainMenuUIParent.SetActive(false);
                 gameUIParent.SetActive(true);
                 gameEndUIParent.SetActive(false);
+                UpdateStats();
                 UpdateBossCountdownText(RoomManager.instance.RoomsBeforeBossRoom);
                 break;
             case GameState.GameEnd:
@@ -64,37 +68,51 @@ public class UIManager : MonoBehaviour
     }
 
     private void SetupButtons() {
-        playerButton.onClick.AddListener(() => GameManager.instance.ChangeGameState(GameState.Game));
+        playButton.onClick.AddListener(() => GameManager.instance.ChangeGameState(GameState.Game));
+        gameEndToMainMenuButton.onClick.AddListener(() => GameManager.instance.ChangeGameState(GameState.MainMenu));
     }
 
     public void UpdateBossCountdownText(int roomsUntilBossRoom) {
         if(roomsUntilBossRoom <= 5) {
             string roomText;
-            switch(roomsUntilBossRoom) {
-                case 1:
-                    roomText = "1 Room";
-                    break;
-                case 2:
-                    roomText = "2 Rooms";
-                    break;
-                case 3:
-                    roomText = "3 Rooms";
-                    break;
-                case 4:
-                    roomText = "4 Rooms";
-                    break;
-                case 5:
-                    roomText = "5 Rooms";
-                    break;
-                default:
-                    roomText = "# Rooms";
-                    break;
+
+            if(roomsUntilBossRoom == 1) {
+                roomText = "1 Room";
+            } else if(roomsUntilBossRoom > 1) {
+                roomText = string.Format("{0} Rooms", roomsUntilBossRoom);
+            } else {
+                roomText = "# Rooms";
             }
 
             bossCountdownText.gameObject.SetActive(true);
             bossCountdownText.text = string.Format("{0} until Boss", roomText);
         } else {
             bossCountdownText.gameObject.SetActive(false);
+        }
+    }
+
+    public void UpdateStats() {
+        foreach(Stat stat in GameManager.instance.player.Stats.Keys) {
+            switch(stat) {
+                case Stat.MoveSpeed:
+                    float reducedMoveSpeedNum = GameManager.instance.player.Stats[stat] / 10f;
+                    moveSpeedText.text = reducedMoveSpeedNum.ToString();
+                    break;
+                case Stat.MaxHealth:
+                    float currentHealth = GameManager.instance.player.CurrentHealth;
+                    healthText.text = string.Format("{0} / {1}", currentHealth, GameManager.instance.player.Stats[stat]);
+                    break;
+                case Stat.Damage:
+                    damageText.text = GameManager.instance.player.Stats[stat].ToString();
+                    break;
+                case Stat.AttackTime:
+                    attackTimeText.text = string.Format("{0}s", GameManager.instance.player.Stats[stat]);
+                    break;
+                case Stat.ProjectileSpeed:
+                    float reducedProjectileSpeedNum = GameManager.instance.player.Stats[stat] / 10f;
+                    projectileSpeedText.text = reducedProjectileSpeedNum.ToString();
+                    break;
+            }
         }
     }
 }

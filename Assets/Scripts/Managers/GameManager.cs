@@ -9,14 +9,6 @@ public enum GameState
     GameEnd
 }
 
-public enum Stat {
-    MoveSpeed, 
-    Health, 
-    Damage, 
-    AttackTime, 
-    ProjectileSpeed
-}
-
 public class GameManager : MonoBehaviour
 {
     #region Singleton Code
@@ -61,5 +53,11 @@ public class GameManager : MonoBehaviour
 
         currentGameState = newGameState;
         UIManager.instance.ChangeUIState(currentGameState);
+    }
+
+    public void ClearProjectiles() {
+        for(int i = projectilesParent.childCount - 1; i >= 0; i--) {
+            Destroy(projectilesParent.GetChild(i).gameObject);
+        }
     }
 }

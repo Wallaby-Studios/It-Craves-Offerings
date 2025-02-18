@@ -77,6 +77,7 @@ public class RoomManager : MonoBehaviour
         }
 
         SetupDoors();
+        GameManager.instance.ClearProjectiles();
         UIManager.instance.UpdateBossCountdownText(roomsBeforeBossRoom - currentRoomCount);
 
         switch(currentRoomType) {
