@@ -36,13 +36,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         SetupButtons();
-        UpdateStats();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ChangeUIState(GameState newGameState) {

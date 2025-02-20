@@ -54,17 +54,21 @@ public class RoomManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentRoomType = RoomType.Combat;
-        currentRoomCount = 0;
-        roomsBeforeBossRoom = 10;
-
-        SetupDoors();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void GameSetup() {
+        currentRoomType = RoomType.Combat;
+        currentRoomCount = 0;
+        roomsBeforeBossRoom = 10;
+
+        SetupDoors();
     }
 
     public void ChangeRooms(RoomType newRoomType) {
@@ -102,7 +106,14 @@ public class RoomManager : MonoBehaviour
     }
 
     private void SetupDoors() {
-        if(currentRoomCount < roomsBeforeBossRoom - 1) {
+        if(currentRoomCount == 0) {
+            // For the first room, unlock all doors
+            foreach(GameObject door in nonBossDoors) {
+                door.SetActive(true);
+                door.GetComponent<Door>().Unlocked = true;
+            }
+            bossDoor.SetActive(false);
+        } else if(currentRoomCount < roomsBeforeBossRoom - 1) {
             // For any room before the 8th room, show all doors and lock them if the current room is a combat room
             foreach(GameObject door in nonBossDoors) {
                 door.SetActive(true);
@@ -117,7 +128,7 @@ public class RoomManager : MonoBehaviour
             // Show the boss door and lock it only if the 9th room is a combat room
             bossDoor.SetActive(true);
             bossDoor.GetComponent<Door>().Unlocked = currentRoomType != RoomType.Combat;
-        } else {
+        } else  {
             // For the 10th room, hide all doors
             foreach(GameObject door in nonBossDoors) {
                 door.SetActive(false);
@@ -127,6 +138,7 @@ public class RoomManager : MonoBehaviour
     }
 
     public void CombatRoomCleared() {
+        // Exit early if the current room is not a combat room
         if(currentRoomType != RoomType.Combat) {
             return;
         }

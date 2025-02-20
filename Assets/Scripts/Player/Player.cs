@@ -35,17 +35,7 @@ public class Player : MonoBehaviour
     }
 
     void Start() {
-        stats = new Dictionary<Stat, float>();
-        stats.Add(Stat.MaxHealth, baseMaxHealth);
-        stats.Add(Stat.MoveSpeed, baseMoveSpeed);
-        stats.Add(Stat.Damage, baseDamage);
-        stats.Add(Stat.AttackTime, baseAttackTime);
-        stats.Add(Stat.ProjectileSpeed, baseProjectileSpeed);
-
-        currentHealth = stats[Stat.MaxHealth];
-        currentFireTimer = 0f;
-
-        controls = GetComponent<PlayerControls>();
+        
     }
 
     private void Update() {
@@ -65,6 +55,20 @@ public class Player : MonoBehaviour
 
             currentFireTimer += Time.deltaTime;
         }
+    }
+
+    public void SetStats() {
+        stats = new Dictionary<Stat, float>();
+        stats.Add(Stat.MaxHealth, baseMaxHealth);
+        stats.Add(Stat.MoveSpeed, baseMoveSpeed);
+        stats.Add(Stat.Damage, baseDamage);
+        stats.Add(Stat.AttackTime, baseAttackTime);
+        stats.Add(Stat.ProjectileSpeed, baseProjectileSpeed);
+
+        currentHealth = stats[Stat.MaxHealth];
+        currentFireTimer = 0f;
+
+        controls = GetComponent<PlayerControls>();
     }
 
     public void Fire() {

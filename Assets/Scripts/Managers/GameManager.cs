@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
             case GameState.MainMenu:
                 break;
             case GameState.Game:
+                RoomManager.instance.GameSetup();
+                player.SetStats();
                 break;
             case GameState.GameEnd:
                 break;
