@@ -83,6 +83,7 @@ public class RoomManager : MonoBehaviour
 
         switch(currentRoomType) {
             case RoomType.Combat:
+                EnemyManager.instance.SpawnEnemy(EnemyType.Ranged);
                 break;
             case RoomType.Heal:
                 // Spawn a health pickup if the new room is a healing room
@@ -130,10 +131,15 @@ public class RoomManager : MonoBehaviour
             return;
         }
 
-        // Unlock every door
-        foreach(GameObject door in nonBossDoors) {
-            door.SetActive(true);
-            door.GetComponent<Door>().Unlocked = true;
+        if(currentRoomCount < roomsBeforeBossRoom - 1) {
+            // Unlock all (normal) doors
+            foreach(GameObject door in nonBossDoors) {
+                door.SetActive(true);
+                door.GetComponent<Door>().Unlocked = true;
+            }
+        } else if(currentRoomCount == roomsBeforeBossRoom - 1) {
+            // Unlock the boss door
+            bossDoor.GetComponent<Door>().Unlocked = true;
         }
     }
 }

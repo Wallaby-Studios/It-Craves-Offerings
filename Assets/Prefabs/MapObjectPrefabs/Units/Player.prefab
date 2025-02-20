@@ -373,4 +373,6 @@ MonoBehaviour:
   baseMaxHealth: 10
   baseDamage: 2
   baseAttackTime: 0.5
-  baseProjectileSpeed: 400
+  baseProjectileSpeed: 600
+  currentHealth: 0
+  currentFireTimer: 0

@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        target = GameManager.instance.player.transform;
         moveSpeed = Random.Range(2, 3);
         //PickRandomBehavior();
         currentBehavior = Behavior.Wander;

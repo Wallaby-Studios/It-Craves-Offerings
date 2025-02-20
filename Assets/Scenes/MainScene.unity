@@ -668,7 +668,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1841522381209870617, guid: e797a5a646f226147b280632dbc44e42, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1841522381209870617, guid: e797a5a646f226147b280632dbc44e42, type: 3}
       propertyPath: m_LocalPosition.y
@@ -725,6 +725,10 @@ PrefabInstance:
     - target: {fileID: 3369659729647175833, guid: e797a5a646f226147b280632dbc44e42, type: 3}
       propertyPath: m_Color.r
       value: 0.8502883
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369659729647175833, guid: e797a5a646f226147b280632dbc44e42, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4525067041432968001, guid: e797a5a646f226147b280632dbc44e42, type: 3}
       propertyPath: roomType
@@ -2989,6 +2993,14 @@ PrefabInstance:
       propertyPath: lockedColor.r
       value: 0.39607844
       objectReference: {fileID: 0}
+    - target: {fileID: 4525067041432968001, guid: e797a5a646f226147b280632dbc44e42, type: 3}
+      propertyPath: unlockedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4525067041432968001, guid: e797a5a646f226147b280632dbc44e42, type: 3}
+      propertyPath: unlockedColor.g
+      value: 0.20392159
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3014,7 +3026,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1841522381209870617, guid: e797a5a646f226147b280632dbc44e42, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 1841522381209870617, guid: e797a5a646f226147b280632dbc44e42, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3073,6 +3085,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4525067041432968001, guid: e797a5a646f226147b280632dbc44e42, type: 3}
+      propertyPath: lockedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4525067041432968001, guid: e797a5a646f226147b280632dbc44e42, type: 3}
       propertyPath: lockedColor.b
       value: 0
       objectReference: {fileID: 0}
@@ -3083,6 +3099,10 @@ PrefabInstance:
     - target: {fileID: 4525067041432968001, guid: e797a5a646f226147b280632dbc44e42, type: 3}
       propertyPath: lockedColor.r
       value: 0.3962264
+      objectReference: {fileID: 0}
+    - target: {fileID: 4525067041432968001, guid: e797a5a646f226147b280632dbc44e42, type: 3}
+      propertyPath: unlockedColor.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4525067041432968001, guid: e797a5a646f226147b280632dbc44e42, type: 3}
       propertyPath: unlockedColor.r

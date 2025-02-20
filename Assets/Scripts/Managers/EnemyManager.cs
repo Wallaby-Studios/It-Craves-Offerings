@@ -45,8 +45,19 @@ public class EnemyManager : MonoBehaviour
         
     }
 
+    public List<GameObject> SpawnEnemy(EnemyType enemyType, int count) {
+        // Spawn in a specified number (count) of enemies and return them in a list
+        List<GameObject> enemies = new List<GameObject>();
+        for(int i = 0; i < count; i++) {
+            enemies.Add(SpawnEnemy(enemyType));
+        }
+        return enemies;
+    }
+
     public GameObject SpawnEnemy(EnemyType enemyType) {
+        // TODO: Calculate a spawn postion for the enemy
         Vector2 spawnPosition = Vector2.zero;
+        // Spawn the enemy into the scene at the specified position
         return Instantiate(enemyMap[enemyType], spawnPosition, Quaternion.identity, enemyParentTransform);
     }
 

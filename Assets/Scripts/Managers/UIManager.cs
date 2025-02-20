@@ -95,21 +95,21 @@ public class UIManager : MonoBehaviour
         foreach(Stat stat in GameManager.instance.player.Stats.Keys) {
             switch(stat) {
                 case Stat.MoveSpeed:
-                    float reducedMoveSpeedNum = GameManager.instance.player.Stats[stat] / 10f;
+                    int reducedMoveSpeedNum = (int)(GameManager.instance.player.Stats[stat] / 10f);
                     moveSpeedText.text = reducedMoveSpeedNum.ToString();
                     break;
                 case Stat.MaxHealth:
-                    float currentHealth = GameManager.instance.player.CurrentHealth;
-                    healthText.text = string.Format("{0} / {1}", currentHealth, GameManager.instance.player.Stats[stat]);
+                    int currentHealth = (int)GameManager.instance.player.CurrentHealth;
+                    healthText.text = string.Format("{0} / {1}", currentHealth, (int)GameManager.instance.player.Stats[stat]);
                     break;
                 case Stat.Damage:
-                    damageText.text = GameManager.instance.player.Stats[stat].ToString();
+                    damageText.text = ((int)GameManager.instance.player.Stats[stat]).ToString("F1");
                     break;
                 case Stat.AttackTime:
-                    attackTimeText.text = string.Format("{0}s", GameManager.instance.player.Stats[stat]);
+                    attackTimeText.text = string.Format("{0}s", GameManager.instance.player.Stats[stat].ToString("F2"));
                     break;
                 case Stat.ProjectileSpeed:
-                    float reducedProjectileSpeedNum = GameManager.instance.player.Stats[stat] / 10f;
+                    int reducedProjectileSpeedNum = (int)(GameManager.instance.player.Stats[stat] / 10f);
                     projectileSpeedText.text = reducedProjectileSpeedNum.ToString();
                     break;
             }

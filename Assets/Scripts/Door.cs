@@ -18,6 +18,7 @@ public class Door : MonoBehaviour
         set { 
             unlocked = value;
 
+            // TODO: Remove when door assets are provided
             Color newColor;
             if(value) {
                 newColor = unlockedColor;
@@ -25,13 +26,14 @@ public class Door : MonoBehaviour
                 newColor = lockedColor;
             }
             GetComponent<SpriteRenderer>().color = newColor;
+            // end of TODO
         } 
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        unlocked = true;
+        unlocked = false;
     }
 
     // Update is called once per frame
@@ -41,6 +43,7 @@ public class Door : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
+        // If the player collides with the unlocked door, advance the room
         if(collision.collider != null
             && collision.gameObject.tag == "Player"
             && unlocked) {
