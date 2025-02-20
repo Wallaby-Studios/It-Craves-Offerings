@@ -34,10 +34,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Start() {
-        
-    }
-
     private void Update() {
         if(GameManager.instance.CurrentGameState == GameState.Game) {
             moveDirection = controls.MoveDirection;

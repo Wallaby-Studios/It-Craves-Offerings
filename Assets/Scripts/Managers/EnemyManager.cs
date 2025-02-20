@@ -39,12 +39,6 @@ public class EnemyManager : MonoBehaviour
         enemyMap.Add(EnemyType.Ranged, rangedEnemyPrefab);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public List<GameObject> SpawnEnemy(EnemyType enemyType, int count) {
         // Spawn in a specified number (count) of enemies and return them in a list
         List<GameObject> enemies = new List<GameObject>();
