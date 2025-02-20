@@ -22,6 +22,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     Behavior currentBehavior;
 
+    [SerializeField]
+    private float health;
+
     //determines Wander movement dir
     float xMov;
     float yMov;
@@ -29,6 +32,8 @@ public class Enemy : MonoBehaviour
     //for dir changs on Wander state
     float timeSinceLastChange = 0;
     float cooldown = 1;
+
+    public float Health { get { return health; } }
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +49,6 @@ public class Enemy : MonoBehaviour
         timeSinceLastChange = cooldown;
 
         rb = GetComponent<Rigidbody2D>();
-
     }
 
     // Update is called once per frame
@@ -119,16 +123,28 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void TakeDamage(float damage) {
+        health -= damage;
+
+        if (health <= 0f) {
+            Destroy(gameObject);
+            EnemyManager.instance.CheckForRemainingEnemies();
+        }
+    }
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Projectile>() == null)
-        {
-            Vector2 dirOfHit = collision.contacts[0].point  - (Vector2)transform.position;
-            xMov = -dirOfHit.x;
-            yMov = -dirOfHit.y;
-            cooldown = 3f;
-            timeSinceLastChange = 0;
+        if(collision.gameObject != null) {
+            if(collision.gameObject.GetComponent<Projectile>() == null) {
+                Vector2 dirOfHit = collision.contacts[0].point - (Vector2)transform.position;
+                xMov = -dirOfHit.x;
+                yMov = -dirOfHit.y;
+                cooldown = 3f;
+                timeSinceLastChange = 0;
+            } else {
+                float damage = collision.gameObject.GetComponent<Projectile>().damage;
+                TakeDamage(damage);
+            }
         }
-        
     }
 }

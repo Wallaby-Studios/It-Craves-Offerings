@@ -8,12 +8,24 @@ public class Door : MonoBehaviour
     private RoomType roomType;
     [SerializeField]
     private bool unlocked;
+    [SerializeField]
+    private Color unlockedColor, lockedColor;
 
     public RoomType RoomType { get { return roomType; } }
 
     public bool Unlocked { 
         get { return unlocked; } 
-        set { unlocked = value; } 
+        set { 
+            unlocked = value;
+
+            Color newColor;
+            if(value) {
+                newColor = unlockedColor;
+            } else {
+                newColor = lockedColor;
+            }
+            GetComponent<SpriteRenderer>().color = newColor;
+        } 
     }
 
     // Start is called before the first frame update

@@ -314,3 +314,4 @@ MonoBehaviour:
   target: {fileID: 0}
   anchor: {fileID: 4435658746856639656}
   currentBehavior: 1
+  health: 6

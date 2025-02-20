@@ -10,7 +10,7 @@ public enum Stat {
     ProjectileSpeed
 }
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour 
 {
     [SerializeField]
     private PlayerAim playerAim;
@@ -58,15 +58,18 @@ public class Player : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        rb.velocity = new Vector2(
-            moveDirection.x * stats[Stat.MoveSpeed] * Time.deltaTime, 
-            moveDirection.y * stats[Stat.MoveSpeed] * Time.deltaTime);
+        if(GameManager.instance.CurrentGameState == GameState.Game) {
+            rb.velocity = new Vector2(
+                moveDirection.x * stats[Stat.MoveSpeed] * Time.deltaTime,
+                moveDirection.y * stats[Stat.MoveSpeed] * Time.deltaTime);
 
-        currentFireTimer += Time.deltaTime;
+            currentFireTimer += Time.deltaTime;
+        }
     }
 
     public void Fire() {
-        if(currentFireTimer >= stats[Stat.AttackTime]) {
+        if(GameManager.instance.CurrentGameState == GameState.Game
+            && currentFireTimer >= stats[Stat.AttackTime]) {
             // Reset timer
             currentFireTimer = 0f;
 
