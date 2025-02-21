@@ -28,7 +28,11 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField]
+    private GameObject playerPrefab;
+
     public Player player;
+    public Transform unitsParent;
     public Transform projectilesParent;
 
     private GameState currentGameState;
@@ -46,6 +50,8 @@ public class GameManager : MonoBehaviour
             case GameState.MainMenu:
                 break;
             case GameState.Game:
+                GameObject playerObject = Instantiate(playerPrefab, RoomManager.instance.PlayerSpawnPosition.position, Quaternion.identity, unitsParent);
+                player = playerObject.GetComponent<Player>();
                 RoomManager.instance.GameSetup();
                 player.SetStats();
                 break;

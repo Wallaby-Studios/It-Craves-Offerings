@@ -50,6 +50,7 @@ public class RoomManager : MonoBehaviour {
     private Dictionary<UpgradeTier, int> tierSoulCostMap;
     private Dictionary<UpgradeTier, (float, float)> tierStatAmountMap;
 
+    public Transform PlayerSpawnPosition { get { return playerSpawnPosition; } }
     public RoomType CurrentRoomType { get { return currentRoomType; } }
     public int RoomsBeforeBossRoom { get { return roomsBeforeBossRoom; } }
     public Dictionary<UpgradeTier, int> TierSoulCostMap { get { return tierSoulCostMap; } }

@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private Transform enemyParentTransform;
+    private Transform enemyParentTransform, enemySpawnTransform;
     [SerializeField]
     private GameObject rangedEnemyPrefab;
 
@@ -49,10 +49,8 @@ public class EnemyManager : MonoBehaviour
     }
 
     public GameObject SpawnEnemy(EnemyType enemyType) {
-        // TODO: Calculate a spawn postion for the enemy
-        Vector2 spawnPosition = Vector2.zero;
-        // Spawn the enemy into the scene at the specified position
-        return Instantiate(enemyMap[enemyType], spawnPosition, Quaternion.identity, enemyParentTransform);
+        // Spawn the enemy into the scene
+        return Instantiate(enemyMap[enemyType], enemySpawnTransform.position, Quaternion.identity, enemyParentTransform);
     }
 
     public void CheckForRemainingEnemies() {
