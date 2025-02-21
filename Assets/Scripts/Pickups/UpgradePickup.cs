@@ -9,33 +9,12 @@ public enum UpgradeTier {
     Strong
 }
 
-public class UpgradePickup : MonoBehaviour
-{
+public class UpgradePickup : MonoBehaviour {
     [SerializeField]
     private UpgradeTier tier;
     [SerializeField]
     private Stat buffedStat, nerfedStat;
     private float buffedStatAmount, nerfedStatAmount;
-
-    private Dictionary<UpgradeTier, int> tierSoulCostMap;
-    private Dictionary<UpgradeTier, (float, float)> tierStatAmountMap;
-
-    private void Awake() {
-        tierSoulCostMap = new Dictionary<UpgradeTier, int>();
-        tierStatAmountMap = new Dictionary<UpgradeTier, (float, float)>();
-        // Tier 1 (Weak): 20% buff, 10% nerf, costs 1 souls
-        tierStatAmountMap.Add(UpgradeTier.Weak, (1.2f, 0.9f));
-        // Tier 2 (Average): 40% buff, 20% nerf, costs 3 souls
-        tierStatAmountMap.Add(UpgradeTier.Average, (1.4f, 0.8f));
-        // Tier 3 (Strong): 80% buff, 40% nerf, costs 5 souls
-        tierStatAmountMap.Add(UpgradeTier.Strong, (1.8f, 0.6f));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     /// <summary>
     /// Randomize the effected stats from picking up this upgrade
@@ -45,7 +24,7 @@ public class UpgradePickup : MonoBehaviour
         // Get a random stat to buff
         string[] statNames = Enum.GetNames(typeof(Stat));
         Stat randomStat = (Stat)UnityEngine.Random.Range(0, statNames.Length);
-        
+
         // Get a second, unique stat to nerf
         List<Stat> remainingStats = new List<Stat>();
         for(int i = 0; i < statNames.Length; i++) {
@@ -59,18 +38,22 @@ public class UpgradePickup : MonoBehaviour
         // Set this component's values based on the tier and generated stats
         this.tier = tier;
         buffedStat = randomStat;
-        buffedStatAmount = tierStatAmountMap[tier].Item1;
+        buffedStatAmount = RoomManager.instance.TierStatAmountMap[tier].Item1;
         nerfedStat = randomStat2;
-        nerfedStatAmount = tierStatAmountMap[tier].Item2;
+        nerfedStatAmount = RoomManager.instance.TierStatAmountMap[tier].Item2;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.collider != null) {
             if(collision.gameObject.tag == "Player") {
-                // If the player collides with the upgrade, buff and nerf the player in the corresponding stats
-                collision.gameObject.GetComponent<Player>().Buff(buffedStat, buffedStatAmount);
-                collision.gameObject.GetComponent<Player>().Buff(nerfedStat, nerfedStatAmount);
-                Destroy(gameObject);
+                if(collision.gameObject.GetComponent<Player>().SoulsCount >= RoomManager.instance.TierSoulCostMap[tier]) {
+                    // If the player collides with the upgrade, buff and nerf the player in the corresponding stats
+                    collision.gameObject.GetComponent<Player>().Buff(buffedStat, buffedStatAmount);
+                    collision.gameObject.GetComponent<Player>().Buff(nerfedStat, nerfedStatAmount);
+                    Destroy(gameObject);
+                } else {
+                    Debug.Log("Not Enough Souls");
+                }
             }
         }
     }

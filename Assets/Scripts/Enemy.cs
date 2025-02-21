@@ -4,52 +4,43 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Rigidbody2D rb;
-
-    //inspector variables
-    public float moveSpeed = 3;
-    //enemy points at this transform each frame
-    public Transform target;
-    //enemy's targeting child obj
-    public GameObject anchor;
-
-    enum Behavior
-    {
+    enum Behavior {
         Wander,
         Rush
     }
 
+    //enemy's targeting child obj
     [SerializeField]
-    Behavior currentBehavior;
-
+    private GameObject anchor;
+    [SerializeField]
+    private Behavior currentBehavior;
     [SerializeField]
     private float health;
 
-    //determines Wander movement dir
-    float xMov;
-    float yMov;
+    private Rigidbody2D rb;
+    private Transform target;
+
+    private float moveSpeed, xMov, yMov;
 
     //for dir changs on Wander state
-    float timeSinceLastChange = 0;
-    float cooldown = 1;
+    private float timeSinceLastChange, cooldown;
 
     public float Health { get { return health; } }
 
     // Start is called before the first frame update
-    void Start()
+    void Start() 
     {
+        rb = GetComponent<Rigidbody2D>();
         target = GameManager.instance.player.transform;
         moveSpeed = Random.Range(2, 3);
+
         //PickRandomBehavior();
         currentBehavior = Behavior.Wander;
 
         PickNewDirection();
 
         cooldown = Random.Range(1.5f, 3f);
-
         timeSinceLastChange = cooldown;
-
-        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -107,19 +98,15 @@ public class Enemy : MonoBehaviour
     { 
         xMov = Random.Range(-1, 1);
         yMov = Random.Range(-1, 1);
-        
     }
 
     public void PickRandomBehavior()
     {
         int r = Random.Range(-1, 3);
 
-        if (r == 0)
-        {
+        if (r == 0) {
             currentBehavior = Behavior.Rush;
-        }
-        else
-        {
+        } else {
             currentBehavior = Behavior.Wander;
         }
     }

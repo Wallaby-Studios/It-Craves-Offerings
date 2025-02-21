@@ -9,8 +9,7 @@ public enum RoomType {
     Boss
 }
 
-public class RoomManager : MonoBehaviour
-{
+public class RoomManager : MonoBehaviour {
     #region Singleton Code
     // A public reference to this script
     public static RoomManager instance = null;
@@ -48,8 +47,17 @@ public class RoomManager : MonoBehaviour
     private int currentRoomCount;
     private int roomsBeforeBossRoom;
 
+    private Dictionary<UpgradeTier, int> tierSoulCostMap;
+    private Dictionary<UpgradeTier, (float, float)> tierStatAmountMap;
+
     public RoomType CurrentRoomType { get { return currentRoomType; } }
     public int RoomsBeforeBossRoom { get { return roomsBeforeBossRoom; } }
+    public Dictionary<UpgradeTier, int> TierSoulCostMap { get { return tierSoulCostMap; } }
+    public Dictionary<UpgradeTier, (float, float)> TierStatAmountMap { get { return tierStatAmountMap; } }
+
+    private void Start() {
+        SetupUpgradeRoomMappings();
+    }
 
     public void GameSetup() {
         currentRoomType = RoomType.Combat;
@@ -116,7 +124,7 @@ public class RoomManager : MonoBehaviour
             // Show the boss door and lock it only if the 9th room is a combat room
             bossDoor.SetActive(true);
             bossDoor.GetComponent<Door>().Unlocked = currentRoomType != RoomType.Combat;
-        } else  {
+        } else {
             // For the 10th room, hide all doors
             foreach(GameObject door in nonBossDoors) {
                 door.SetActive(false);
@@ -125,6 +133,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    #region Combat Room Methods
     public void CombatRoomCleared() {
         // Exit early if the current room is not a combat room
         if(currentRoomType != RoomType.Combat) {
@@ -148,6 +157,21 @@ public class RoomManager : MonoBehaviour
         Vector2 positionOffset = new Vector2(
                 Random.Range(-maxOffset, maxOffset),
                 Random.Range(-maxOffset, maxOffset));
-        GameObject soulObject = Instantiate(soulPickupPrefab, spawnPosition + positionOffset, Quaternion.identity, roomObjectsParent);
+        Instantiate(soulPickupPrefab, spawnPosition + positionOffset, Quaternion.identity, roomObjectsParent);
+    }
+    #endregion Combat Room Methods
+
+    private void SetupUpgradeRoomMappings() {
+        tierStatAmountMap = new Dictionary<UpgradeTier, (float, float)>();
+        tierSoulCostMap = new Dictionary<UpgradeTier, int>();
+        // Tier 1 (Weak): 20% buff, 10% nerf, costs 1 souls
+        tierStatAmountMap.Add(UpgradeTier.Weak, (1.2f, 0.9f));
+        tierSoulCostMap.Add(UpgradeTier.Weak, 1);
+        // Tier 2 (Average): 40% buff, 20% nerf, costs 3 souls
+        tierStatAmountMap.Add(UpgradeTier.Average, (1.4f, 0.8f));
+        tierSoulCostMap.Add(UpgradeTier.Average, 3);
+        // Tier 3 (Strong): 80% buff, 40% nerf, costs 5 souls
+        tierStatAmountMap.Add(UpgradeTier.Strong, (1.8f, 0.6f));
+        tierSoulCostMap.Add(UpgradeTier.Strong, 5);
     }
 }
