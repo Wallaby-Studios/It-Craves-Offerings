@@ -21,13 +21,11 @@ public class PlayerAim : MonoBehaviour
     }
 
     public void UpdateAim(Vector3 lookPosition) {
-        // Convert the passed in position from screen space to world space using the camera 
-        Vector3 worldLookPosition = Camera.main.ScreenToWorldPoint(lookPosition);
         // Zero the z coordinate
-        worldLookPosition.z = 0f;
+        lookPosition.z = 0f;
         
         // Find the direction between the look position and player 
-        Vector3 newDirection = worldLookPosition - transform.position;
+        Vector3 newDirection = lookPosition - transform.position;
         newDirection.Normalize();
 
         // Rotate the object by setting its up vector 

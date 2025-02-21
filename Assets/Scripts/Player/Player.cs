@@ -10,10 +10,11 @@ public enum Stat {
     ProjectileSpeed
 }
 
-public class Player : MonoBehaviour 
-{
+public class Player : MonoBehaviour {
     [SerializeField]
     private PlayerAim playerAim;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
     [SerializeField]
     private GameObject projectilePrefab;
     [SerializeField]
@@ -40,8 +41,13 @@ public class Player : MonoBehaviour
         if(GameManager.instance.CurrentGameState == GameState.Game) {
             moveDirection = controls.MoveDirection;
             lookPosition = controls.LookPosition;
+            
+            // Convert the look position from screen space to world space using the camera 
+            Vector3 worldLookPosition = Camera.main.ScreenToWorldPoint(lookPosition);
+            // Flip the sprite if the look position is less than the player's X position
+            spriteRenderer.flipX = worldLookPosition.x < transform.position.x;
 
-            playerAim.UpdateAim(lookPosition);
+            playerAim.UpdateAim(worldLookPosition);
         }
     }
 
