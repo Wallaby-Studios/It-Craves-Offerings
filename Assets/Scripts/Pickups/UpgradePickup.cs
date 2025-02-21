@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum UpgradeTier {
@@ -11,10 +12,13 @@ public enum UpgradeTier {
 
 public class UpgradePickup : MonoBehaviour {
     [SerializeField]
+    private TMP_Text soulsCostText;
+    [SerializeField]
     private UpgradeTier tier;
     [SerializeField]
     private Stat buffedStat, nerfedStat;
-    private float buffedStatAmount, nerfedStatAmount;
+
+    private float buffedStatAmount, nerfedStatAmount, cost;
 
     /// <summary>
     /// Randomize the effected stats from picking up this upgrade
@@ -37,6 +41,8 @@ public class UpgradePickup : MonoBehaviour {
 
         // Set this component's values based on the tier and generated stats
         this.tier = tier;
+        cost = RoomManager.instance.TierSoulCostMap[tier];
+        soulsCostText.text = string.Format("x {0}", cost);
         buffedStat = randomStat;
         buffedStatAmount = RoomManager.instance.TierStatAmountMap[tier].Item1;
         nerfedStat = randomStat2;
@@ -46,7 +52,7 @@ public class UpgradePickup : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.collider != null) {
             if(collision.gameObject.tag == "Player") {
-                if(collision.gameObject.GetComponent<Player>().SoulsCount >= RoomManager.instance.TierSoulCostMap[tier]) {
+                if(collision.gameObject.GetComponent<Player>().SoulsCount >= cost) {
                     // If the player collides with the upgrade, buff and nerf the player in the corresponding stats
                     collision.gameObject.GetComponent<Player>().Buff(buffedStat, buffedStatAmount);
                     collision.gameObject.GetComponent<Player>().Buff(nerfedStat, nerfedStatAmount);
