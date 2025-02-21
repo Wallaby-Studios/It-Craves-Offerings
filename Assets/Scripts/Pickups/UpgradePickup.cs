@@ -18,7 +18,8 @@ public class UpgradePickup : MonoBehaviour {
     [SerializeField]
     private Stat buffedStat, nerfedStat;
 
-    private float buffedStatAmount, nerfedStatAmount, cost;
+    private float buffedStatAmount, nerfedStatAmount;
+    private int cost;
 
     /// <summary>
     /// Randomize the effected stats from picking up this upgrade
@@ -52,10 +53,12 @@ public class UpgradePickup : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.collider != null) {
             if(collision.gameObject.tag == "Player") {
-                if(collision.gameObject.GetComponent<Player>().SoulsCount >= cost) {
+                Player player = collision.gameObject.GetComponent<Player>();
+                if(player.SoulsCount >= cost) {
                     // If the player collides with the upgrade, buff and nerf the player in the corresponding stats
                     collision.gameObject.GetComponent<Player>().Buff(buffedStat, buffedStatAmount);
                     collision.gameObject.GetComponent<Player>().Buff(nerfedStat, nerfedStatAmount);
+                    player.SpendSouls(cost);
                     Destroy(gameObject);
                 } else {
                     Debug.Log("Not Enough Souls");
