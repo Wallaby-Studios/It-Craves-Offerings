@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7973098185607302954}
   - component: {fileID: 5805939683036071935}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4213050487345766838}
   - component: {fileID: 4331786932694385195}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerAimAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8384529715934814813}
   - component: {fileID: 1401642415975780925}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerAimSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 4102081663562795446}
   - component: {fileID: 1505962139271531929}
   - component: {fileID: 6844069425440788396}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

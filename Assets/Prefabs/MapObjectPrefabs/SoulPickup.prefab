@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6511498202268207507}
   - component: {fileID: 668199887625354610}
   - component: {fileID: -2183038028228151026}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SoulPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

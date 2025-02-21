@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8820003639979351965}
   - component: {fileID: 6553234996293122423}
   - component: {fileID: 9082106538106520684}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: soulsSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 3741414399531566166}
   - component: {fileID: 1902890179544560752}
   - component: {fileID: 2057874086780092583}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5628667355562381838}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: soulsCostParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 6511498202268207507}
   - component: {fileID: 4015906819942812824}
   - component: {fileID: 1377610628776080704}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UpgradePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 8458140468014426242}
   - component: {fileID: 409445340405005454}
   - component: {fileID: 6491383707387571182}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: soulsCostNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
