@@ -12,7 +12,7 @@ public class FloatObject : MonoBehaviour
 
     private void Start() {
         speed = 3f;
-        height = 0.25f;
+        height = 0.1f;
         randomStartOffset = Random.Range(0f, 1f);
 
         pos = transform.position;

@@ -153,11 +153,7 @@ public class RoomManager : MonoBehaviour {
     }
 
     public void SpawnSoul(Vector2 spawnPosition) {
-        float maxOffset = 1.5f;
-        Vector2 positionOffset = new Vector2(
-                Random.Range(-maxOffset, maxOffset),
-                Random.Range(-maxOffset, maxOffset));
-        Instantiate(soulPickupPrefab, spawnPosition + positionOffset, Quaternion.identity, roomObjectsParent);
+        Instantiate(soulPickupPrefab, spawnPosition, Quaternion.identity, roomObjectsParent);
     }
     #endregion Combat Room Methods
 

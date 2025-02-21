@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
             // Reset timer
             currentFireTimer = 0f;
 
-            Vector3 projectilePosition = transform.position + playerAim.Direction;
+            Vector3 projectilePosition = transform.position + playerAim.Direction / 2f;
             GameObject projectile = Instantiate(projectilePrefab, projectilePosition, Quaternion.identity, GameManager.instance.projectilesParent);
             // Give the projectile damage
             projectile.GetComponent<Projectile>().damage = stats[Stat.Damage];
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
     }
 
     public void Heal() {
-        currentHealth = baseMaxHealth;
+        currentHealth = stats[Stat.MaxHealth];
         UIManager.instance.UpdateStats();
     }
 
