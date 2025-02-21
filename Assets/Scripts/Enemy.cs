@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -25,7 +26,20 @@ public class Enemy : MonoBehaviour
     //for dir changs on Wander state
     private float timeSinceLastChange, cooldown;
 
+
+    //Attack Variables
+    [Header("Attack Fields")]
+    public float strafingAttackCooldown = 2f;
+    float timeSinceLastStrafingAttack = 0;
+    EnemyShooting eShooting;
+    public float stationaryTimeBetweenShots = 0.2f;
+    float timeSinceLastStationaryShot = 0;
+
+
     public float Health { get { return health; } }
+
+  
+
 
     // Start is called before the first frame update
     void Start() 
@@ -41,6 +55,10 @@ public class Enemy : MonoBehaviour
 
         cooldown = Random.Range(1.5f, 3f);
         timeSinceLastChange = cooldown;
+        eShooting = GetComponentInChildren<EnemyShooting>();
+        timeSinceLastStrafingAttack = 0;
+        
+
     }
 
     // Update is called once per frame
@@ -49,6 +67,31 @@ public class Enemy : MonoBehaviour
         if(GameManager.instance.CurrentGameState == GameState.Game) {
             PerformBehavior();
             LookAtTarget();
+            HandleStrafe();
+
+            if (xMov == 0 && yMov == 0)
+            {
+                timeSinceLastStationaryShot += Time.deltaTime;
+                if (timeSinceLastStationaryShot > stationaryTimeBetweenShots)
+                {
+                    eShooting.PerformAttack();
+                    timeSinceLastStationaryShot = 0;
+                }
+            }
+        }
+    }
+
+    public void HandleStrafe()
+    {
+        timeSinceLastStrafingAttack += Time.deltaTime;
+        if (timeSinceLastStrafingAttack > strafingAttackCooldown)
+        {
+            
+            int burstSize = Random.Range(3, 5);
+            timeSinceLastChange -= burstSize * 0.05f;
+            StartCoroutine(eShooting.StrafingAttack(burstSize));
+            timeSinceLastStrafingAttack = 0;
+            strafingAttackCooldown = Random.Range(0.5f, 1.5f);
         }
     }
 
@@ -65,6 +108,8 @@ public class Enemy : MonoBehaviour
             timeSinceLastChange = 0;
             cooldown = Random.Range(1.5f, 3f);
         }
+
+       
     }
 
     public void RushAtTarget()
