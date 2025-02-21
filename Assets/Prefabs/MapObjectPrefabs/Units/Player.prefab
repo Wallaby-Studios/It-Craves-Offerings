@@ -379,6 +379,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAim: {fileID: 4331786932694385195}
   spriteRenderer: {fileID: 5805939683036071935}
+  baseSprite: {fileID: 21300000, guid: 60c7664b10a2860418181293a1c15d68, type: 3}
+  combatSprite: {fileID: 21300000, guid: 4826a3a7e9e7e4a40ae1a7b0367bdbe8, type: 3}
+  healthSprite: {fileID: 21300000, guid: 2be3a8207a2bc8c43b1b55ba9bbb68c1, type: 3}
+  upgradeSprite: {fileID: 21300000, guid: 3d8341368d1c73740bb21e37966167b0, type: 3}
   projectilePrefab: {fileID: 2372424437940126768, guid: 70e7319825d717d47a66d8ad047b3128, type: 3}
   baseMoveSpeed: 100
   baseMaxHealth: 10

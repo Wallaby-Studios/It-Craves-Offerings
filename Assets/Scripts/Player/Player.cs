@@ -16,6 +16,8 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private SpriteRenderer spriteRenderer;
     [SerializeField]
+    private Sprite baseSprite, combatSprite, healthSprite, upgradeSprite;
+    [SerializeField]
     private GameObject projectilePrefab;
     [SerializeField]
     private float baseMoveSpeed, baseMaxHealth, baseDamage, baseAttackTime, baseProjectileSpeed;
@@ -26,6 +28,7 @@ public class Player : MonoBehaviour {
     private Rigidbody2D rb;
     private PlayerControls controls;
     private int soulsCount;
+    private float tempSpriteTimerCurrent;
 
     private Vector2 moveDirection, lookPosition;
 
@@ -58,6 +61,14 @@ public class Player : MonoBehaviour {
                 moveDirection.y * stats[Stat.MoveSpeed] * Time.deltaTime);
 
             currentFireTimer += Time.deltaTime;
+
+            if(tempSpriteTimerCurrent > 0f) {
+                tempSpriteTimerCurrent -= Time.deltaTime;
+            } else if(tempSpriteTimerCurrent <= 0f) {
+                if(spriteRenderer.sprite != baseSprite) {
+                    spriteRenderer.sprite = baseSprite;
+                }
+            }
         }
     }
 
@@ -111,6 +122,7 @@ public class Player : MonoBehaviour {
 
     public void Heal() {
         currentHealth = stats[Stat.MaxHealth];
+        TemporarilySwapSprite(healthSprite, 2.0f);
         UIManager.instance.UpdateStats();
     }
 
@@ -135,11 +147,13 @@ public class Player : MonoBehaviour {
                 break;
         }
 
+        TemporarilySwapSprite(upgradeSprite, 2.0f);
         UIManager.instance.UpdateStats();
     }
 
     public void GiveSouls(int souls) {
         soulsCount += souls;
+        TemporarilySwapSprite(combatSprite, 2.0f);
         UIManager.instance.UpdateStats();
     }
 
@@ -151,5 +165,10 @@ public class Player : MonoBehaviour {
         }
 
         return false;
+    }
+
+    private void TemporarilySwapSprite(Sprite tempSprite, float duration) {
+        tempSpriteTimerCurrent = duration;
+        spriteRenderer.sprite = tempSprite;
     }
 }
