@@ -65,6 +65,7 @@ public class RoomManager : MonoBehaviour {
         currentRoomCount = 0;
         roomsBeforeBossRoom = 10;
 
+        ClearRoom();
         SetupDoors();
     }
 
@@ -73,15 +74,12 @@ public class RoomManager : MonoBehaviour {
         currentRoomCount++;
         GameManager.instance.player.transform.position = playerSpawnPosition.position;
 
-        // Destroy all objects in the room
-        for(int i = roomObjectsParent.childCount - 1; i >= 0; i--) {
-            Destroy(roomObjectsParent.GetChild(i).gameObject);
-        }
-
+        ClearRoom();
         SetupDoors();
         GameManager.instance.ClearProjectiles();
         UIManager.instance.UpdateBossCountdownText(roomsBeforeBossRoom - currentRoomCount);
 
+        // Spawn in units or pickups based on the new room type
         switch(currentRoomType) {
             case RoomType.Combat:
                 EnemyManager.instance.SpawnEnemy(EnemyType.Ranged);
@@ -99,6 +97,14 @@ public class RoomManager : MonoBehaviour {
                 break;
             case RoomType.Boss:
                 break;
+        }
+    }
+
+    private void ClearRoom() {
+        EnemyManager.instance.ClearEnemies();
+        // Destroy all objects in the room
+        for(int i = roomObjectsParent.childCount - 1; i >= 0; i--) {
+            Destroy(roomObjectsParent.GetChild(i).gameObject);
         }
     }
 

@@ -63,4 +63,11 @@ public class EnemyManager : MonoBehaviour
         // If no enemies remain with health, notify the RoomManager that the room is cleared
         RoomManager.instance.CombatRoomCleared();
     }
+
+    public void ClearEnemies() {
+        // Destroy all enemies in the room
+        for(int i = enemyParentTransform.childCount - 1; i >= 0; i--) {
+            Destroy(enemyParentTransform.GetChild(i).gameObject);
+        }
+    }
 }
