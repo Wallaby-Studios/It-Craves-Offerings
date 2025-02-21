@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 985453125276510194}
   - component: {fileID: 5475574255348790450}
-  - component: {fileID: -52007841610023759}
   - component: {fileID: 6511498202268207507}
   - component: {fileID: 668199887625354610}
+  - component: {fileID: -2183038028228151026}
   m_Layer: 0
   m_Name: SoulPickup
   m_TagString: Untagged
@@ -87,33 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &-52007841610023759
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6169253947097032524}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.5
-  m_LinearDrag: 1
-  m_AngularDrag: 1
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!58 &6511498202268207507
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -161,3 +134,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61cdcffd5063de4cbed5744b65072ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2183038028228151026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169253947097032524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f76faf6f2315b428679ec58e9b3cfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomStart: 1

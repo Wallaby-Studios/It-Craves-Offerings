@@ -17,15 +17,17 @@ public class UpgradePickup : MonoBehaviour
     private Stat buffedStat, nerfedStat;
     private float buffedStatAmount, nerfedStatAmount;
 
+    private Dictionary<UpgradeTier, int> tierSoulCostMap;
     private Dictionary<UpgradeTier, (float, float)> tierStatAmountMap;
 
     private void Awake() {
+        tierSoulCostMap = new Dictionary<UpgradeTier, int>();
         tierStatAmountMap = new Dictionary<UpgradeTier, (float, float)>();
-        // Tier 1 (Weak): 20% buff, 10% nerf
+        // Tier 1 (Weak): 20% buff, 10% nerf, costs 1 souls
         tierStatAmountMap.Add(UpgradeTier.Weak, (1.2f, 0.9f));
-        // Tier 2 (Average): 40% buff, 20% nerf
+        // Tier 2 (Average): 40% buff, 20% nerf, costs 3 souls
         tierStatAmountMap.Add(UpgradeTier.Average, (1.4f, 0.8f));
-        // Tier 3 (Strong): 80% buff, 40% nerf
+        // Tier 3 (Strong): 80% buff, 40% nerf, costs 5 souls
         tierStatAmountMap.Add(UpgradeTier.Strong, (1.8f, 0.6f));
     }
 

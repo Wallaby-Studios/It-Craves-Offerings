@@ -24,8 +24,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private float health;
-    [SerializeField]
-    private int souls;
 
     //determines Wander movement dir
     float xMov;
@@ -133,7 +131,7 @@ public class Enemy : MonoBehaviour
             // If the enemy has lost all health,
             // Destroy it, spawn souls where it died, and check if the room is cleared
             Destroy(gameObject);
-            RoomManager.instance.SpawnSouls(souls, transform.position);
+            RoomManager.instance.SpawnSoul(transform.position);
             EnemyManager.instance.CheckForRemainingEnemies();
         }
     }

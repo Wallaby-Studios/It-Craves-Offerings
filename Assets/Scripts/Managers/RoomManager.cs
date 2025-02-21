@@ -47,7 +47,6 @@ public class RoomManager : MonoBehaviour
     private RoomType currentRoomType;
     private int currentRoomCount;
     private int roomsBeforeBossRoom;
-    float soulSpawnOffsetBounds;
 
     public RoomType CurrentRoomType { get { return currentRoomType; } }
     public int RoomsBeforeBossRoom { get { return roomsBeforeBossRoom; } }
@@ -56,7 +55,6 @@ public class RoomManager : MonoBehaviour
         currentRoomType = RoomType.Combat;
         currentRoomCount = 0;
         roomsBeforeBossRoom = 10;
-        soulSpawnOffsetBounds = 1.5f;
 
         SetupDoors();
     }
@@ -145,12 +143,11 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void SpawnSouls(int count, Vector2 spawnPosition) {
-        for(int i = 0; i < count; i++) {
-            Vector2 positionOffset = new Vector2(
-                    Random.Range(-soulSpawnOffsetBounds, soulSpawnOffsetBounds),
-                    Random.Range(-soulSpawnOffsetBounds, soulSpawnOffsetBounds));
-            Instantiate(soulPickupPrefab, spawnPosition + positionOffset, Quaternion.identity, roomObjectsParent);
-        }
+    public void SpawnSoul(Vector2 spawnPosition) {
+        float maxOffset = 1.5f;
+        Vector2 positionOffset = new Vector2(
+                Random.Range(-maxOffset, maxOffset),
+                Random.Range(-maxOffset, maxOffset));
+        GameObject soulObject = Instantiate(soulPickupPrefab, spawnPosition + positionOffset, Quaternion.identity, roomObjectsParent);
     }
 }
