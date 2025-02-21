@@ -24,11 +24,13 @@ public class Player : MonoBehaviour
     private Dictionary<Stat, float> stats;
     private Rigidbody2D rb;
     private PlayerControls controls;
+    private int soulsCount;
 
     private Vector2 moveDirection, lookPosition;
 
     public Dictionary<Stat, float> Stats { get { return stats; } }
     public float CurrentHealth { get { return currentHealth; } }
+    public int SoulsCount { get { return soulsCount; } }
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -63,6 +65,7 @@ public class Player : MonoBehaviour
 
         currentHealth = stats[Stat.MaxHealth];
         currentFireTimer = 0f;
+        soulsCount = 0;
 
         controls = GetComponent<PlayerControls>();
     }
@@ -127,5 +130,20 @@ public class Player : MonoBehaviour
         }
 
         UIManager.instance.UpdateStats();
+    }
+
+    public void GiveSouls(int souls) {
+        soulsCount += souls;
+        UIManager.instance.UpdateStats();
+    }
+
+    public bool SpendSouls(int souls) {
+        if(soulsCount >= souls) {
+            soulsCount -= souls;
+            UIManager.instance.UpdateStats();
+            return true;
+        }
+
+        return false;
     }
 }

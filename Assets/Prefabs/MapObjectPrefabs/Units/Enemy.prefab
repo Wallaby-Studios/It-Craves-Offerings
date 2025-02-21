@@ -315,3 +315,4 @@ MonoBehaviour:
   anchor: {fileID: 4435658746856639656}
   currentBehavior: 1
   health: 6
+  souls: 3

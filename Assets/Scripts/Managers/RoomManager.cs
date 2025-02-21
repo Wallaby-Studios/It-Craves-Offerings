@@ -42,11 +42,12 @@ public class RoomManager : MonoBehaviour
     [SerializeField]
     private Transform roomObjectsParent;
     [SerializeField]
-    private GameObject healthPickupPrefab, upgradePickupPrefab;
+    private GameObject healthPickupPrefab, upgradePickupPrefab, soulPickupPrefab;
 
     private RoomType currentRoomType;
     private int currentRoomCount;
     private int roomsBeforeBossRoom;
+    float soulSpawnOffsetBounds;
 
     public RoomType CurrentRoomType { get { return currentRoomType; } }
     public int RoomsBeforeBossRoom { get { return roomsBeforeBossRoom; } }
@@ -55,6 +56,7 @@ public class RoomManager : MonoBehaviour
         currentRoomType = RoomType.Combat;
         currentRoomCount = 0;
         roomsBeforeBossRoom = 10;
+        soulSpawnOffsetBounds = 1.5f;
 
         SetupDoors();
     }
@@ -140,6 +142,15 @@ public class RoomManager : MonoBehaviour
         } else if(currentRoomCount == roomsBeforeBossRoom - 1) {
             // Unlock the boss door
             bossDoor.GetComponent<Door>().Unlocked = true;
+        }
+    }
+
+    public void SpawnSouls(int count, Vector2 spawnPosition) {
+        for(int i = 0; i < count; i++) {
+            Vector2 positionOffset = new Vector2(
+                    Random.Range(-soulSpawnOffsetBounds, soulSpawnOffsetBounds),
+                    Random.Range(-soulSpawnOffsetBounds, soulSpawnOffsetBounds));
+            Instantiate(soulPickupPrefab, spawnPosition + positionOffset, Quaternion.identity, roomObjectsParent);
         }
     }
 }

@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TMP_Text bossCountdownText;
     [SerializeField]
-    private TMP_Text healthText, moveSpeedText, damageText, attackTimeText, projectileSpeedText;
+    private TMP_Text soulsText, healthText, damageText, moveSpeedText, attackTimeText, projectileSpeedText;
 
     // Start is called before the first frame update
     void Start()
@@ -85,18 +85,21 @@ public class UIManager : MonoBehaviour
     }
 
     public void UpdateStats() {
+        // Update souls text
+        soulsText.text = GameManager.instance.player.SoulsCount.ToString();
+        // Update each stat text
         foreach(Stat stat in GameManager.instance.player.Stats.Keys) {
             switch(stat) {
-                case Stat.MoveSpeed:
-                    int reducedMoveSpeedNum = (int)(GameManager.instance.player.Stats[stat] / 10f);
-                    moveSpeedText.text = reducedMoveSpeedNum.ToString();
-                    break;
                 case Stat.MaxHealth:
                     int currentHealth = (int)GameManager.instance.player.CurrentHealth;
                     healthText.text = string.Format("{0} / {1}", currentHealth, (int)GameManager.instance.player.Stats[stat]);
                     break;
                 case Stat.Damage:
                     damageText.text = ((int)GameManager.instance.player.Stats[stat]).ToString("F1");
+                    break;
+                case Stat.MoveSpeed:
+                    int reducedMoveSpeedNum = (int)(GameManager.instance.player.Stats[stat] / 10f);
+                    moveSpeedText.text = reducedMoveSpeedNum.ToString();
                     break;
                 case Stat.AttackTime:
                     attackTimeText.text = string.Format("{0}s", GameManager.instance.player.Stats[stat].ToString("F2"));
