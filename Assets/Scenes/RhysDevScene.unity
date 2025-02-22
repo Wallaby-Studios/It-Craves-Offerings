@@ -1804,6 +1804,7 @@ MonoBehaviour:
   enemyParentTransform: {fileID: 1884804460}
   enemySpawnTransform: {fileID: 363199147}
   rangedEnemyPrefab: {fileID: 7162440770645916944, guid: 0791955b3e1657e42b31ecc0a727786f, type: 3}
+  bossPrefab: {fileID: 7162440770645916944, guid: c9bf5a1cf4decc64aade21e9b1af1e57, type: 3}
 --- !u!1 &644589975
 GameObject:
   m_ObjectHideFlags: 0

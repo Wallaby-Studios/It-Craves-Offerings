@@ -98,6 +98,7 @@ public class RoomManager : MonoBehaviour {
                 }
                 break;
             case RoomType.Boss:
+                EnemyManager.instance.SpawnBoss();
                 break;
         }
     }

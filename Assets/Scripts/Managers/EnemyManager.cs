@@ -29,6 +29,8 @@ public class EnemyManager : MonoBehaviour
     private Transform enemyParentTransform, enemySpawnTransform;
     [SerializeField]
     private GameObject rangedEnemyPrefab;
+    [SerializeField]
+    private GameObject bossPrefab;
 
     private Dictionary<EnemyType, GameObject> enemyMap;
 
@@ -51,6 +53,10 @@ public class EnemyManager : MonoBehaviour
     public GameObject SpawnEnemy(EnemyType enemyType) {
         // Spawn the enemy into the scene
         return Instantiate(enemyMap[enemyType], enemySpawnTransform.position, Quaternion.identity, enemyParentTransform);
+    }
+
+    public GameObject SpawnBoss() {
+        return Instantiate(bossPrefab, enemySpawnTransform.position, Quaternion.identity, enemyParentTransform);
     }
 
     public void CheckForRemainingEnemies() {

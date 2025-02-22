@@ -60,10 +60,10 @@ public class UIManager : MonoBehaviour
                 gameEndUIParent.SetActive(true);
                 
                 // Update the game end text based on if the player succeeded
-                if(GameManager.instance.player.gameObject != null) {
-                    gameEndText.text = "IT IS DISPLEASED...";
-                } else {
+                if(GameManager.instance.player.CurrentHealth > 0) {
                     gameEndText.text = "IT IS PLEASED...";
+                } else {
+                    gameEndText.text = "IT IS DISPLEASED...";
                 }
                 break;
         }
@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void UpdateBossCountdownText(int roomsUntilBossRoom) {
-        if(roomsUntilBossRoom <= 5) {
+        if(roomsUntilBossRoom <= 5 && roomsUntilBossRoom > 0) {
             string roomText;
 
             if(roomsUntilBossRoom == 1) {
