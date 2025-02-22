@@ -385,6 +385,7 @@ MonoBehaviour:
   healthSprite: {fileID: 21300000, guid: 2be3a8207a2bc8c43b1b55ba9bbb68c1, type: 3}
   upgradeSprite: {fileID: 21300000, guid: 3d8341368d1c73740bb21e37966167b0, type: 3}
   projectilePrefab: {fileID: 2372424437940126768, guid: 70e7319825d717d47a66d8ad047b3128, type: 3}
+  deathPrefab: {fileID: 118816481284654319, guid: 0ff69e54b2c00414ab58f66061e47af7, type: 3}
   baseMoveSpeed: 100
   baseMaxHealth: 10
   baseDamage: 2

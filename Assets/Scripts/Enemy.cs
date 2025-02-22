@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 
     //enemy's targeting child obj
     [SerializeField]
-    private GameObject anchor;
+    private GameObject anchor, deathPrefab;
     [SerializeField]
     private Behavior currentBehavior;
     [SerializeField]
@@ -170,6 +170,7 @@ public class Enemy : MonoBehaviour
             // If the enemy has lost all health,
             // Destroy it, spawn souls where it died, and check if the room is cleared
             GameObject s = Instantiate(deathSound);
+            Instantiate(deathPrefab, gameObject.transform.position, Quaternion.identity, GameManager.instance.projectilesParent);
             Destroy(gameObject);
             RoomManager.instance.SpawnSoul(transform.position);
             EnemyManager.instance.CheckForRemainingEnemies();

@@ -148,3 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomStart: 1
   isRotating: 1
+  height: 0.05

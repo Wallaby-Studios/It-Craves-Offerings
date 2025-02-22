@@ -19,7 +19,7 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private Sprite baseSprite, combatSprite, healthSprite, upgradeSprite;
     [SerializeField]
-    private GameObject projectilePrefab;
+    private GameObject projectilePrefab, deathPrefab;
     [SerializeField]
     private float baseMoveSpeed, baseMaxHealth, baseDamage, baseAttackTime, baseProjectileSpeed;
     [SerializeField]
@@ -126,13 +126,14 @@ public class Player : MonoBehaviour {
 
         if(currentHealth <= 0) {
             GameManager.instance.ChangeGameState(GameState.GameEnd);
+            Instantiate(deathPrefab, gameObject.transform.position, Quaternion.identity, GameManager.instance.projectilesParent);
             Destroy(gameObject);
         }
     }
 
     public void Heal() {
         currentHealth = stats[Stat.MaxHealth];
-        TemporarilySwapSprite(healthSprite, 2.0f);
+        TemporarilySwapSprite(healthSprite, 1.0f);
         UIManager.instance.UpdateStats();
     }
 
@@ -157,13 +158,13 @@ public class Player : MonoBehaviour {
                 break;
         }
 
-        TemporarilySwapSprite(upgradeSprite, 2.0f);
+        TemporarilySwapSprite(upgradeSprite, 1.0f);
         UIManager.instance.UpdateStats();
     }
 
     public void GiveSouls(int souls) {
         soulsCount += souls;
-        TemporarilySwapSprite(combatSprite, 2.0f);
+        TemporarilySwapSprite(combatSprite, 1.0f);
         UIManager.instance.UpdateStats();
     }
 

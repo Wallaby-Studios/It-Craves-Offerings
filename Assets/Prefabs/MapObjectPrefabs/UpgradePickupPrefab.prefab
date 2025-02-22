@@ -475,6 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomStart: 1
   isRotating: 0
+  height: 0.1
 --- !u!1 &5256962060961012039
 GameObject:
   m_ObjectHideFlags: 0

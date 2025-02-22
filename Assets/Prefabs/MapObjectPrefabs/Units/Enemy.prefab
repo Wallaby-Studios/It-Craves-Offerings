@@ -471,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchor: {fileID: 4435658746856639656}
+  deathPrefab: {fileID: 118816481284654319, guid: 0ff69e54b2c00414ab58f66061e47af7, type: 3}
   currentBehavior: 1
   health: 6
   strafingAttackCooldown: 2

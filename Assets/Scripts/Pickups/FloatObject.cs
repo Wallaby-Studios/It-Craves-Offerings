@@ -6,13 +6,14 @@ public class FloatObject : MonoBehaviour
 {
     [SerializeField]
     private bool randomStart, isRotating;
+    [SerializeField]
+    private float height;
 
-    private float speed, height, randomStartOffset;
+    private float speed, randomStartOffset;
     private Vector3 pos;
     float rotZ = 0;
     private void Start() {
         speed = 3f;
-        height = 0.1f;
         randomStartOffset = Random.Range(0f, 1f);
 
         pos = transform.position;
