@@ -31,6 +31,8 @@ public class UIManager : MonoBehaviour
     private TMP_Text bossCountdownText;
     [SerializeField]
     private TMP_Text soulsText, healthText, damageText, moveSpeedText, attackTimeText, projectileSpeedText;
+    [SerializeField]
+    private TMP_Text gameEndText;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,13 @@ public class UIManager : MonoBehaviour
                 mainMenuUIParent.SetActive(false);
                 gameUIParent.SetActive(false);
                 gameEndUIParent.SetActive(true);
+                
+                // Update the game end text based on if the player succeeded
+                if(GameManager.instance.player.gameObject != null) {
+                    gameEndText.text = "IT IS DISPLEASED...";
+                } else {
+                    gameEndText.text = "IT IS PLEASED...";
+                }
                 break;
         }
     }

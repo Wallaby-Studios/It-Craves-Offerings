@@ -48,6 +48,10 @@ public class GameManager : MonoBehaviour
     public void ChangeGameState(GameState newGameState) {
         switch(newGameState) {
             case GameState.MainMenu:
+                // Remove the player if it exists before the Game gameState
+                if(player != null) {
+                    Destroy(player.gameObject);
+                }
                 break;
             case GameState.Game:
                 GameObject playerObject = Instantiate(playerPrefab, RoomManager.instance.PlayerSpawnPosition.position, Quaternion.identity, unitsParent);
