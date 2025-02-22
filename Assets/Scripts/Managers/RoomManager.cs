@@ -34,7 +34,7 @@ public class RoomManager : MonoBehaviour {
     private List<Transform> pickupSpawnPositions;
     // Doors
     [SerializeField]
-    private GameObject nonBossDoorsClosedTilemap, nonBossDoorsOpenTilemap, bossDoorClosedTilemap, bossDoorOpenTilemap;
+    private GameObject nonBossDoorsClosedTilemap, nonBossDoorsOpenTilemap, bossDoorClosedTilemap, bossDoorOpenTilemap, nonBossRoomWalls, bossRoomWalls;
     [SerializeField]
     private List<GameObject> nonBossDoors;
     [SerializeField]
@@ -157,6 +157,10 @@ public class RoomManager : MonoBehaviour {
             bossDoorOpenTilemap.SetActive(false);
             bossDoorClosedTilemap.SetActive(false);
         }
+
+        //// Show the correct walls
+        //nonBossRoomWalls.SetActive(currentRoomCount roomsBeforeBossRoom > 0);
+        //bossRoomWalls.SetActive(currentRoomCount roomsBeforeBossRoom == 0);
     }
 
     #region Combat Room Methods
@@ -177,6 +181,8 @@ public class RoomManager : MonoBehaviour {
         } else if(currentRoomCount == roomsBeforeBossRoom - 1) {
             // Unlock the boss door
             bossDoor.GetComponent<Door>().Unlocked = true;
+            bossDoorOpenTilemap.SetActive(true);
+            bossDoorClosedTilemap.SetActive(false);
         }
     }
 
