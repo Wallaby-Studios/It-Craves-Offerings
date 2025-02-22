@@ -197,14 +197,14 @@ public class RoomManager : MonoBehaviour {
     private void SetupUpgradeRoomMappings() {
         tierStatAmountMap = new Dictionary<UpgradeTier, (float, float)>();
         tierSoulCostMap = new Dictionary<UpgradeTier, int>();
-        // Tier 1 (Weak): 20% buff, 10% nerf, costs 1 souls
-        tierStatAmountMap.Add(UpgradeTier.Weak, (1.2f, 0.9f));
+        // Tier 1 (Weak): 20% buff, 20% nerf, costs 1 souls
+        tierStatAmountMap.Add(UpgradeTier.Weak, (1.2f, 0.8f));
         tierSoulCostMap.Add(UpgradeTier.Weak, 1);
         // Tier 2 (Average): 40% buff, 20% nerf, costs 3 souls
         tierStatAmountMap.Add(UpgradeTier.Average, (1.4f, 0.8f));
         tierSoulCostMap.Add(UpgradeTier.Average, 3);
-        // Tier 3 (Strong): 80% buff, 40% nerf, costs 5 souls
-        tierStatAmountMap.Add(UpgradeTier.Strong, (1.8f, 0.6f));
+        // Tier 3 (Strong): 80% buff, 20% nerf, costs 5 souls
+        tierStatAmountMap.Add(UpgradeTier.Strong, (1.8f, 0.8f));
         tierSoulCostMap.Add(UpgradeTier.Strong, 5);
 
         // Stat Sprite Map
