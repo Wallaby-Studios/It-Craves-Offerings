@@ -44,6 +44,9 @@ public class RoomManager : MonoBehaviour {
     private Transform roomObjectsParent;
     [SerializeField]
     private GameObject healthPickupPrefab, upgradePickupPrefab, soulPickupPrefab;
+    // Stat Sprites
+    [SerializeField]
+    private Sprite healthSprite, damageSprite, moveSpeedSprite, attackSpeedSprite, projectileSpeedSprite;
 
     private RoomType currentRoomType;
     private int currentRoomCount;
@@ -51,12 +54,14 @@ public class RoomManager : MonoBehaviour {
 
     private Dictionary<UpgradeTier, int> tierSoulCostMap;
     private Dictionary<UpgradeTier, (float, float)> tierStatAmountMap;
+    private Dictionary<Stat, Sprite> statSpriteMap;
 
     public Transform PlayerSpawnPosition { get { return playerSpawnPosition; } }
     public RoomType CurrentRoomType { get { return currentRoomType; } }
     public int RoomsBeforeBossRoom { get { return roomsBeforeBossRoom; } }
     public Dictionary<UpgradeTier, int> TierSoulCostMap { get { return tierSoulCostMap; } }
     public Dictionary<UpgradeTier, (float, float)> TierStatAmountMap { get { return tierStatAmountMap; } }
+    public Dictionary<Stat, Sprite> StatSpriteMap { get { return statSpriteMap; } }
 
     private void Start() {
         SetupUpgradeRoomMappings();
@@ -204,5 +209,13 @@ public class RoomManager : MonoBehaviour {
         // Tier 3 (Strong): 80% buff, 40% nerf, costs 5 souls
         tierStatAmountMap.Add(UpgradeTier.Strong, (1.8f, 0.6f));
         tierSoulCostMap.Add(UpgradeTier.Strong, 5);
+
+        // Stat Sprite Map
+        statSpriteMap = new Dictionary<Stat, Sprite>();
+        statSpriteMap.Add(Stat.MaxHealth, healthSprite);
+        statSpriteMap.Add(Stat.Damage, damageSprite);
+        statSpriteMap.Add(Stat.MoveSpeed, moveSpeedSprite);
+        statSpriteMap.Add(Stat.AttackTime, attackSpeedSprite);
+        statSpriteMap.Add(Stat.ProjectileSpeed, projectileSpeedSprite);
     }
 }

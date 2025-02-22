@@ -5,7 +5,7 @@ using UnityEngine;
 public class FloatObject : MonoBehaviour
 {
     [SerializeField]
-    private bool randomStart;
+    private bool randomStart, isRotating;
 
     private float speed, height, randomStartOffset;
     private Vector3 pos;
@@ -29,7 +29,10 @@ public class FloatObject : MonoBehaviour
 
         // Set the object's new Y position
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
-        rotZ += 50f * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(new Vector3(0,0,rotZ));
+
+        if(isRotating) {
+            rotZ += 50f * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotZ));
+        }
     }
 }

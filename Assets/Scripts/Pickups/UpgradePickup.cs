@@ -14,6 +14,10 @@ public class UpgradePickup : MonoBehaviour {
     [SerializeField]
     private TMP_Text soulsCostText;
     [SerializeField]
+    private SpriteRenderer buffedStatSprite, nerfedStatSprite;
+    [SerializeField]
+    private GameObject activeArrowSet, weakArrowSetPrefab, averageArrowSetPrefab, strongArrowSetPrefab;
+    [SerializeField]
     private UpgradeTier tier;
     [SerializeField]
     private Stat buffedStat, nerfedStat;
@@ -44,10 +48,25 @@ public class UpgradePickup : MonoBehaviour {
         this.tier = tier;
         cost = RoomManager.instance.TierSoulCostMap[tier];
         soulsCostText.text = string.Format("x {0}", cost);
+
+        switch(tier) {
+            case UpgradeTier.Weak:
+                Instantiate(weakArrowSetPrefab, activeArrowSet.transform);
+                break;
+            case UpgradeTier.Average:
+                Instantiate(averageArrowSetPrefab, activeArrowSet.transform);
+                break;
+            case UpgradeTier.Strong:
+                Instantiate(strongArrowSetPrefab, activeArrowSet.transform);
+                break;
+        }
+
         buffedStat = randomStat;
         buffedStatAmount = RoomManager.instance.TierStatAmountMap[tier].Item1;
+        buffedStatSprite.sprite = RoomManager.instance.StatSpriteMap[buffedStat];
         nerfedStat = randomStat2;
         nerfedStatAmount = RoomManager.instance.TierStatAmountMap[tier].Item2;
+        nerfedStatSprite.sprite = RoomManager.instance.StatSpriteMap[nerfedStat];
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
