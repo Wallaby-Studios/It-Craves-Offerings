@@ -32,7 +32,12 @@ public class Projectile : MonoBehaviour
             p.transform.position = collision.contacts[0].point;
             
             Destroy(p, 1);
-            if(gameObject.layer != 10 && collision.gameObject.layer != 8) {
+            // If the projectile is a BossProjectile
+            if(gameObject.layer == 10) {
+                if(collision.gameObject.layer != 8) {
+                    Destroy(gameObject);
+                }
+            } else {
                 Destroy(gameObject);
             }
         }

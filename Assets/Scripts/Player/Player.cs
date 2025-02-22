@@ -72,6 +72,8 @@ public class Player : MonoBehaviour {
                     spriteRenderer.sprite = baseSprite;
                 }
             }
+        } else {
+            rb.velocity = Vector2.zero;
         }
     }
 

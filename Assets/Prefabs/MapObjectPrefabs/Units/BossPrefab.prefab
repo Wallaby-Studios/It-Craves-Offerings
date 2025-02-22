@@ -176,7 +176,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -205,8 +205,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossProjectilePrefab: {fileID: 5352159123890656705, guid: 8ef2f54d7cfe9be4aa1eacc0aedc3d25, type: 3}
   health: 50
+  damage: 5
+  moveSpeed: 1
   attackTimer: 5
-  projectileSpeed: 80
-  projectileSpawnRange: 1.5
+  projectileSpeed: 5
   attackMaxAngle: 60
   numberOfProjectilesPerAttack: 5
