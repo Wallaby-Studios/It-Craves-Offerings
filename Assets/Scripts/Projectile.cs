@@ -32,15 +32,9 @@ public class Projectile : MonoBehaviour
             p.transform.position = collision.contacts[0].point;
             
             Destroy(p, 1);
-<<<<<<< Updated upstream
             if(gameObject.layer != 10 && collision.gameObject.layer != 8) {
                 Destroy(gameObject);
             }
-=======
-            Destroy(gameObject);
-            
-           
->>>>>>> Stashed changes
         }
     }
 }
