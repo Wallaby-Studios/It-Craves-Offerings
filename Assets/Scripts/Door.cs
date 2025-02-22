@@ -8,27 +8,10 @@ public class Door : MonoBehaviour
     private RoomType roomType;
     [SerializeField]
     private bool unlocked;
-    [SerializeField]
-    private Color unlockedColor, lockedColor;
 
     public RoomType RoomType { get { return roomType; } }
 
-    public bool Unlocked { 
-        get { return unlocked; } 
-        set { 
-            unlocked = value;
-
-            // TODO: Remove when door assets are provided
-            Color newColor;
-            if(value) {
-                newColor = unlockedColor;
-            } else {
-                newColor = lockedColor;
-            }
-            GetComponent<SpriteRenderer>().color = newColor;
-            // end of TODO
-        } 
-    }
+    public bool Unlocked { get { return unlocked; } }
 
     // Start is called before the first frame update
     void Start()

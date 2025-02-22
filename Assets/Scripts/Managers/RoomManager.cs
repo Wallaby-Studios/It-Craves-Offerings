@@ -34,11 +34,9 @@ public class RoomManager : MonoBehaviour {
     private List<Transform> pickupSpawnPositions;
     // Doors
     [SerializeField]
-    private GameObject nonBossDoorsClosedTilemap, nonBossDoorsOpenTilemap, bossDoorClosedTilemap, bossDoorOpenTilemap, nonBossRoomWalls, bossRoomWalls;
+    private GameObject bossDoorClosedTilemap, bossDoorOpenTilemap, nonBossRoomWalls, bossRoomWalls;
     [SerializeField]
-    private List<GameObject> nonBossDoors;
-    [SerializeField]
-    private GameObject bossDoor;
+    private List<GameObject> nonBossDoorsClosedTilemaps, nonBossDoorsOpenTilemaps;
     // Room Objects
     [SerializeField]
     private Transform roomObjectsParent;
@@ -120,46 +118,45 @@ public class RoomManager : MonoBehaviour {
         // Setup Non-Boss Doors (Healing, Combat, and Upgrade Doors)
         if(currentRoomCount == 0) {
             // For the first room, unlock all doors
-            foreach(GameObject door in nonBossDoors) {
-                door.SetActive(true);
-                door.GetComponent<Door>().Unlocked = true;
+            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
+                doorTilemap.SetActive(true);
             }
-            nonBossDoorsOpenTilemap.SetActive(true);
-            nonBossDoorsClosedTilemap.SetActive(false);
+            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
+                doorTilemap.SetActive(false);
+            }
         } else if(currentRoomCount < roomsBeforeBossRoom - 1) {
             // For any room before the 8th room, show all doors and lock them if the current room is a combat room
-            foreach(GameObject door in nonBossDoors) {
-                door.SetActive(true);
-                door.GetComponent<Door>().Unlocked = currentRoomType != RoomType.Combat;
+            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
+                doorTilemap.SetActive(currentRoomType != RoomType.Combat);
             }
-            nonBossDoorsOpenTilemap.SetActive(currentRoomType != RoomType.Combat);
-            nonBossDoorsClosedTilemap.SetActive(currentRoomType == RoomType.Combat);
+            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
+                doorTilemap.SetActive(currentRoomType == RoomType.Combat);
+            }
         } else if(currentRoomCount == roomsBeforeBossRoom - 1) {
             // For the 9th room, hide all non-boss doors 
-            foreach(GameObject door in nonBossDoors) {
-                door.SetActive(false);
+            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
+                doorTilemap.SetActive(false);
             }
-            nonBossDoorsOpenTilemap.SetActive(false);
-            nonBossDoorsClosedTilemap.SetActive(false);
+            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
+                doorTilemap.SetActive(false);
+            }
         } else {
             // For the 10th room, hide all doors
-            foreach(GameObject door in nonBossDoors) {
-                door.SetActive(false);
+            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
+                doorTilemap.SetActive(false);
             }
-            nonBossDoorsOpenTilemap.SetActive(false);
-            nonBossDoorsClosedTilemap.SetActive(false);
+            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
+                doorTilemap.SetActive(false);
+            }
         }
 
         // Setup Boss Door
         if(currentRoomCount == roomsBeforeBossRoom - 1) {
             // Show the boss door and lock it only if the 9th room is a combat room
-            bossDoor.SetActive(true);
-            bossDoor.GetComponent<Door>().Unlocked = currentRoomType != RoomType.Combat;
             bossDoorOpenTilemap.SetActive(currentRoomType != RoomType.Combat);
             bossDoorClosedTilemap.SetActive(currentRoomType == RoomType.Combat);
         } else {
             // Otherwise hide the boss door
-            bossDoor.SetActive(false);
             bossDoorOpenTilemap.SetActive(false);
             bossDoorClosedTilemap.SetActive(false);
         }
@@ -178,15 +175,15 @@ public class RoomManager : MonoBehaviour {
 
         if(currentRoomCount < roomsBeforeBossRoom - 1) {
             // Unlock all (normal) doors
-            foreach(GameObject door in nonBossDoors) {
-                door.SetActive(true);
-                door.GetComponent<Door>().Unlocked = true;
-                nonBossDoorsOpenTilemap.SetActive(true);
-                nonBossDoorsClosedTilemap.SetActive(false);
+            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
+                doorTilemap.SetActive(true);
             }
+            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
+                doorTilemap.SetActive(false);
+            }
+
         } else if(currentRoomCount == roomsBeforeBossRoom - 1) {
             // Unlock the boss door
-            bossDoor.GetComponent<Door>().Unlocked = true;
             bossDoorOpenTilemap.SetActive(true);
             bossDoorClosedTilemap.SetActive(false);
         }
