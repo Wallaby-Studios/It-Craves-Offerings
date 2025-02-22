@@ -8,10 +8,15 @@ public class EnemyShooting : MonoBehaviour
     public GameObject spawner;
     public GameObject bulletPrefab;
     public float bulletForce;
+    AudioSource audio;
     // Start is called before the first frame update
-
+    private void Start()
+    {
+        audio = GetComponent<AudioSource>();    
+    }
     public void PerformAttack()
     {
+        audio.Play();
         GameObject g = Instantiate(bulletPrefab);
         Vector3 recoilOffset = new Vector3(Random.Range(-.2f, .2f), Random.Range(-.2f, .2f), 0);
         g.transform.position = spawner.transform.position + recoilOffset;

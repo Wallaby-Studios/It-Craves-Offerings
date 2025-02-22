@@ -32,15 +32,14 @@ public class Player : MonoBehaviour {
     private float tempSpriteTimerCurrent;
 
     private Vector2 moveDirection, lookPosition;
-
+    AudioSource audio;
     public Dictionary<Stat, float> Stats { get { return stats; } }
     public float CurrentHealth { get { return currentHealth; } }
     public int SoulsCount { get { return soulsCount; } }
-
+    public List<AudioClip> castSFX = new List<AudioClip>();
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
-        //Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        audio = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -106,6 +105,9 @@ public class Player : MonoBehaviour {
             projectileForce *= stats[Stat.ProjectileSpeed];
             projectile.GetComponent<Rigidbody2D>().AddForce(projectileForce);
             projectile.transform.right = playerAim.transform.up;
+            int choice = Random.Range(0, castSFX.Count - 1);
+            audio.clip = castSFX[choice];
+            audio.Play();
         }
     }
 

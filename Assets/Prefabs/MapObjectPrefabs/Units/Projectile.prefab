@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   impactParticle: {fileID: 5359533221492647265, guid: 715712ce34a922444a8c1b2dd54e9c91, type: 3}
+  audio: {fileID: 0}
 --- !u!1 &4791056709811175170
 GameObject:
   m_ObjectHideFlags: 0
