@@ -41,13 +41,10 @@ public class Enemy : MonoBehaviour
     public GameObject gruntSound;
     public float Health { get { return health; } }
 
-    
-  
-
-
     // Start is called before the first frame update
     void Start() 
     {
+        health = RoomManager.instance.CurrentRoomCount * 2;
         rb = GetComponent<Rigidbody2D>();
         target = GameManager.instance.player.transform;
         moveSpeed = Random.Range(1, 2);

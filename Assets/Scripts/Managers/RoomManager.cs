@@ -56,6 +56,7 @@ public class RoomManager : MonoBehaviour {
 
     public Transform PlayerSpawnPosition { get { return playerSpawnPosition; } }
     public RoomType CurrentRoomType { get { return currentRoomType; } }
+    public int CurrentRoomCount { get { return currentRoomCount; } }
     public int RoomsBeforeBossRoom { get { return roomsBeforeBossRoom; } }
     public Dictionary<UpgradeTier, int> TierSoulCostMap { get { return tierSoulCostMap; } }
     public Dictionary<UpgradeTier, (float, float)> TierStatAmountMap { get { return tierStatAmountMap; } }

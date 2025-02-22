@@ -104,7 +104,7 @@ public class UIManager : MonoBehaviour
                     healthText.text = string.Format("{0} / {1}", currentHealth, (int)GameManager.instance.player.Stats[stat]);
                     break;
                 case Stat.Damage:
-                    damageText.text = ((int)GameManager.instance.player.Stats[stat]).ToString("F1");
+                    damageText.text = GameManager.instance.player.Stats[stat].ToString("F1");
                     break;
                 case Stat.MoveSpeed:
                     int reducedMoveSpeedNum = (int)(GameManager.instance.player.Stats[stat] / 10f);
