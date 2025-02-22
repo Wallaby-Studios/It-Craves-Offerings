@@ -5991,8 +5991,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3358060822200260437, guid: e797a5a646f226147b280632dbc44e42, type: 3}
   m_PrefabInstance: {fileID: 2118615598}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &2121247561
 GameObject:
   m_ObjectHideFlags: 0
@@ -6121,7 +6119,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
->>>>>>> Stashed changes
 --- !u!1001 &2230924064140064897
 PrefabInstance:
   m_ObjectHideFlags: 0
