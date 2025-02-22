@@ -152,8 +152,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a4243e748739d2040bc9c3e8f54aa1d0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
-  m_Pitch: 1
+  m_Volume: 0.15
+  m_Pitch: 1.98
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -475,3 +475,4 @@ MonoBehaviour:
   health: 6
   strafingAttackCooldown: 2
   stationaryTimeBetweenShots: 0.3
+  deathSound: {fileID: 4907005523202578207, guid: 8b23d943698561e4598fe77e366e3ba9, type: 3}

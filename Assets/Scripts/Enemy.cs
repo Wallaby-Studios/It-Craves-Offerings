@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     public float stationaryTimeBetweenShots = 0.2f;
     float timeSinceLastStationaryShot = 0;
 
-
+    public GameObject deathSound;
     public float Health { get { return health; } }
 
     
@@ -169,6 +169,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0f) {
             // If the enemy has lost all health,
             // Destroy it, spawn souls where it died, and check if the room is cleared
+            GameObject s = Instantiate(deathSound);
             Destroy(gameObject);
             RoomManager.instance.SpawnSoul(transform.position);
             EnemyManager.instance.CheckForRemainingEnemies();

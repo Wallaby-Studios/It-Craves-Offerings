@@ -392,6 +392,7 @@ MonoBehaviour:
   baseProjectileSpeed: 300
   currentHealth: 0
   currentFireTimer: 0
+  fleshHit: {fileID: 8300000, guid: 7333355ca60c3ba41b7f4cf4761037f3, type: 3}
   castSFX:
   - {fileID: 8300000, guid: 7ebd2d949b1fa8c4689dae7036021151, type: 3}
   - {fileID: 8300000, guid: f2133dab7717d4a47a75d9be5cb9920b, type: 3}
