@@ -9,6 +9,7 @@ public class EnemyShooting : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletForce;
     AudioSource audio;
+    public List<AudioClip> firingSounds = new List<AudioClip>();
     // Start is called before the first frame update
     private void Start()
     {
@@ -16,6 +17,8 @@ public class EnemyShooting : MonoBehaviour
     }
     public void PerformAttack()
     {
+        int i = Random.Range(0, firingSounds.Count - 1);
+        audio.clip = firingSounds[i];
         audio.Play();
         GameObject g = Instantiate(bulletPrefab);
         Vector3 recoilOffset = new Vector3(Random.Range(-.2f, .2f), Random.Range(-.2f, .2f), 0);
@@ -29,7 +32,7 @@ public class EnemyShooting : MonoBehaviour
         for (int i = 0; i < burstSize; i++)
         {
             PerformAttack();
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.15f);
         }
         
     }

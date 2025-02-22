@@ -135,6 +135,11 @@ MonoBehaviour:
   spawner: {fileID: 5997144959818289433}
   bulletPrefab: {fileID: 5352159123890656705, guid: 520221475b4401b4d9ffdcd6ac9aac12, type: 3}
   bulletForce: 100
+  firingSounds:
+  - {fileID: 8300000, guid: 7ebd2d949b1fa8c4689dae7036021151, type: 3}
+  - {fileID: 8300000, guid: f2133dab7717d4a47a75d9be5cb9920b, type: 3}
+  - {fileID: 8300000, guid: a4243e748739d2040bc9c3e8f54aa1d0, type: 3}
+  - {fileID: 8300000, guid: 90f0debe11d066d40a6603555c1edd6e, type: 3}
 --- !u!82 &2664038987394234577
 AudioSource:
   m_ObjectHideFlags: 0
