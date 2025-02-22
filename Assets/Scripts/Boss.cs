@@ -16,10 +16,13 @@ public class Boss : MonoBehaviour
     private Rigidbody2D rb;
     private float attackTimerCurrent;
     private float xMov, yMov, cooldown, timeSinceLastChange, wanderDuration;
-
+    public List<AudioClip> audioClipList = new List<AudioClip>();
+    public AudioClip deathSound;
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();    
         rb = GetComponent<Rigidbody2D>();
         attackTimerCurrent = 0f;
         cooldown = Random.Range(3f, 5f);
@@ -104,7 +107,17 @@ public class Boss : MonoBehaviour
     private void TakeDamage(float damage) {
         health -= damage;
 
+        int r = Random.Range(0, 20);
+        if (r > 16)
+        {
+            int j = Random.Range(0, audioClipList.Count - 1);
+            audio.clip = audioClipList[j];
+            audio.Play();
+
+        }
         if(health <= 0f) {
+            audio.clip = deathSound;
+            audio.Play();
             // If the boss is killed, move the game to the GameEnd State
             Destroy(gameObject);
             GameManager.instance.ChangeGameState(GameState.GameEnd);

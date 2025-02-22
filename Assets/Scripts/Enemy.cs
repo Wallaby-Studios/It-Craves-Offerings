@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
     float timeSinceLastStationaryShot = 0;
 
     public GameObject deathSound;
+    public GameObject gruntSound;
     public float Health { get { return health; } }
 
     
@@ -165,7 +166,8 @@ public class Enemy : MonoBehaviour
 
     private void TakeDamage(float damage) {
         health -= damage;
-
+        GameObject g = Instantiate(gruntSound);
+        
         if (health <= 0f) {
             // If the enemy has lost all health,
             // Destroy it, spawn souls where it died, and check if the room is cleared
