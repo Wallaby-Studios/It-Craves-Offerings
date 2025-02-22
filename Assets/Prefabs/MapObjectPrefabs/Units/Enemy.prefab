@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 5997144959818289433}
   bulletPrefab: {fileID: 5352159123890656705, guid: 520221475b4401b4d9ffdcd6ac9aac12, type: 3}
-  bulletForce: 150
+  bulletForce: 100
 --- !u!1 &5997144959818289433
 GameObject:
   m_ObjectHideFlags: 0

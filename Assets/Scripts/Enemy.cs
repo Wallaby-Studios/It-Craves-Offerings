@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
     enum Behavior {
         Wander,
-        Rush
+        Rush,
+        Dash
     }
 
     //enemy's targeting child obj
@@ -38,6 +40,7 @@ public class Enemy : MonoBehaviour
 
     public float Health { get { return health; } }
 
+    
   
 
 
