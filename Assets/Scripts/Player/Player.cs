@@ -102,6 +102,7 @@ public class Player : MonoBehaviour {
             projectileForce.Normalize();
             projectileForce *= stats[Stat.ProjectileSpeed];
             projectile.GetComponent<Rigidbody2D>().AddForce(projectileForce);
+            projectile.transform.right = playerAim.transform.up;
         }
     }
 
