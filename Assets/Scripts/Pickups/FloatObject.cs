@@ -9,7 +9,7 @@ public class FloatObject : MonoBehaviour
 
     private float speed, height, randomStartOffset;
     private Vector3 pos;
-
+    float rotZ = 0;
     private void Start() {
         speed = 3f;
         height = 0.1f;
@@ -29,5 +29,7 @@ public class FloatObject : MonoBehaviour
 
         // Set the object's new Y position
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        rotZ += 50f * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(new Vector3(0,0,rotZ));
     }
 }

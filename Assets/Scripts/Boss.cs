@@ -47,6 +47,7 @@ public class Boss : MonoBehaviour
         GameObject projectileMiddle = Instantiate(bossProjectilePrefab, position, Quaternion.identity, GameManager.instance.projectilesParent);
         Vector2 projectileForce = directionToPlayer * projectileSpeed;
         projectileMiddle.GetComponent<Rigidbody2D>().AddForce(projectileForce);
+        projectileMiddle.transform.right = directionToPlayer;
     }
 
     private void TakeDamage(float damage) {
