@@ -158,9 +158,9 @@ public class RoomManager : MonoBehaviour {
             bossDoorClosedTilemap.SetActive(false);
         }
 
-        //// Show the correct walls
-        //nonBossRoomWalls.SetActive(currentRoomCount roomsBeforeBossRoom > 0);
-        //bossRoomWalls.SetActive(currentRoomCount roomsBeforeBossRoom == 0);
+        // Show the correct walls
+        nonBossRoomWalls.SetActive(roomsBeforeBossRoom - currentRoomCount > 0);
+        bossRoomWalls.SetActive(roomsBeforeBossRoom - currentRoomCount == 0);
     }
 
     #region Combat Room Methods
