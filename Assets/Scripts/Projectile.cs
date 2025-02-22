@@ -28,7 +28,9 @@ public class Projectile : MonoBehaviour
             GameObject p = Instantiate(impactParticle);
             p.transform.position = collision.contacts[0].point;
             Destroy(p, 1);
-            Destroy(gameObject);
+            if(gameObject.layer != 10 && collision.gameObject.layer != 8) {
+                Destroy(gameObject);
+            }
         }
     }
 }

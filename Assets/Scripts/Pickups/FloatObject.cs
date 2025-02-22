@@ -31,7 +31,7 @@ public class FloatObject : MonoBehaviour
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
 
         if(isRotating) {
-            rotZ += 50f * Time.deltaTime;
+            rotZ -= 50f * Time.deltaTime;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotZ));
         }
     }
