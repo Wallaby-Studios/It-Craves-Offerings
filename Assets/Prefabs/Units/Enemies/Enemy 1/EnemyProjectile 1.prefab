@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.25, b: 0.25, a: 0.3254902}
+      maxColor: {r: 0.78431374, g: 0.22745098, b: 1, a: 0.3254902}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5053,7 +5053,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.25, b: 0.25, a: 0.105882354}
+      maxColor: {r: 0.78431374, g: 0.22745098, b: 1, a: 0.105882354}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9674,7 +9674,7 @@ GameObject:
   - component: {fileID: 427337462513582706}
   - component: {fileID: -3129671863379587442}
   m_Layer: 8
-  m_Name: EnemyProjectile
+  m_Name: EnemyProjectile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9740,7 +9740,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.7843138, g: 0.227451, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9825,7 +9825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  impactParticle: {fileID: 8485482080999767145, guid: 891029ef69c02c940a5cf376c612421d, type: 3}
+  impactParticle: {fileID: 8485482080999767145, guid: e69fe263ca2033c4294a8f86ee8a170c, type: 3}
   audio: {fileID: 0}
 --- !u!1 &8099861942872197790
 GameObject:
@@ -10050,7 +10050,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.25, b: 0.25, a: 0.70980394}
+      maxColor: {r: 0.78431374, g: 0.22745098, b: 1, a: 0.70980394}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

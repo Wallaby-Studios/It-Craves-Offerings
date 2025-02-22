@@ -88,7 +88,7 @@ public class RoomManager : MonoBehaviour {
         // Spawn in units or pickups based on the new room type
         switch(currentRoomType) {
             case RoomType.Combat:
-                EnemyManager.instance.SpawnEnemy(EnemyType.Ranged);
+                EnemyManager.instance.SpawnRandomEnemy();
                 break;
             case RoomType.Heal:
                 // Spawn a health pickup if the new room is a healing room

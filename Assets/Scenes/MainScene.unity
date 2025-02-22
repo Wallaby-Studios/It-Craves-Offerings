@@ -2355,7 +2355,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyParentTransform: {fileID: 1884804460}
   enemySpawnTransform: {fileID: 363199147}
-  rangedEnemyPrefab: {fileID: 7162440770645916944, guid: 0791955b3e1657e42b31ecc0a727786f, type: 3}
+  enemyPrefabs:
+  - {fileID: 7162440770645916944, guid: 0791955b3e1657e42b31ecc0a727786f, type: 3}
+  - {fileID: 7162440770645916944, guid: 390bfb26caf4a3a49a40a8ad5dff6fea, type: 3}
+  - {fileID: 7162440770645916944, guid: 5399e36ede246954b844da268ad84816, type: 3}
+  - {fileID: 7162440770645916944, guid: 2c0e0c23a2e11e544beecccf3a09dae5, type: 3}
   bossPrefab: {fileID: 7162440770645916944, guid: c9bf5a1cf4decc64aade21e9b1af1e57, type: 3}
 --- !u!1 &644589975
 GameObject:

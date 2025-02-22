@@ -28,7 +28,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private Transform enemyParentTransform, enemySpawnTransform;
     [SerializeField]
-    private GameObject rangedEnemyPrefab;
+    private List<GameObject> enemyPrefabs;
     [SerializeField]
     private GameObject bossPrefab;
 
@@ -38,21 +38,21 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         enemyMap = new Dictionary<EnemyType, GameObject>();
-        enemyMap.Add(EnemyType.Ranged, rangedEnemyPrefab);
     }
 
     public List<GameObject> SpawnEnemy(EnemyType enemyType, int count) {
         // Spawn in a specified number (count) of enemies and return them in a list
         List<GameObject> enemies = new List<GameObject>();
         for(int i = 0; i < count; i++) {
-            enemies.Add(SpawnEnemy(enemyType));
+            enemies.Add(SpawnRandomEnemy());
         }
         return enemies;
     }
 
-    public GameObject SpawnEnemy(EnemyType enemyType) {
+    public GameObject SpawnRandomEnemy() {
+        GameObject randomEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
         // Spawn the enemy into the scene
-        return Instantiate(enemyMap[enemyType], enemySpawnTransform.position, Quaternion.identity, enemyParentTransform);
+        return Instantiate(randomEnemyPrefab, enemySpawnTransform.position, Quaternion.identity, enemyParentTransform);
     }
 
     public GameObject SpawnBoss() {
