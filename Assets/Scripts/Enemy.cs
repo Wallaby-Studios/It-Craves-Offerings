@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         target = GameManager.instance.player.transform;
-        moveSpeed = Random.Range(2, 3);
+        moveSpeed = Random.Range(1, 2);
 
         //PickRandomBehavior();
         currentBehavior = Behavior.Wander;
@@ -86,12 +86,16 @@ public class Enemy : MonoBehaviour
         timeSinceLastStrafingAttack += Time.deltaTime;
         if (timeSinceLastStrafingAttack > strafingAttackCooldown)
         {
+            if (!(xMov ==0 && yMov == 0) && timeSinceLastChange > 0.5f)
+            {
+                int burstSize = Random.Range(3, 5);
+                //timeSinceLastChange = 0;
+                StartCoroutine(eShooting.StrafingAttack(burstSize));
+                timeSinceLastStrafingAttack = 0;
+                strafingAttackCooldown = Random.Range(1.5f, 3);
+            }
             
-            int burstSize = Random.Range(3, 5);
-            timeSinceLastChange -= burstSize * 0.05f;
-            StartCoroutine(eShooting.StrafingAttack(burstSize));
-            timeSinceLastStrafingAttack = 0;
-            strafingAttackCooldown = Random.Range(0.5f, 1.5f);
+           
         }
     }
 
@@ -106,7 +110,7 @@ public class Enemy : MonoBehaviour
         {
             PickNewDirection();
             timeSinceLastChange = 0;
-            cooldown = Random.Range(1.5f, 3f);
+            cooldown = Random.Range(1.5f, 2f);
         }
 
        

@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 5997144959818289433}
   bulletPrefab: {fileID: 5352159123890656705, guid: 520221475b4401b4d9ffdcd6ac9aac12, type: 3}
-  bulletForce: 600
+  bulletForce: 150
 --- !u!1 &5997144959818289433
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,4 +372,4 @@ MonoBehaviour:
   currentBehavior: 1
   health: 6
   strafingAttackCooldown: 2
-  stationaryTimeBetweenShots: 0.2
+  stationaryTimeBetweenShots: 0.3
