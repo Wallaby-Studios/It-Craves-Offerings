@@ -5,6 +5,8 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     [SerializeField]
+    private SpriteRenderer spriteRenderer;
+    [SerializeField]
     private GameObject bossProjectilePrefab;
     [SerializeField]
     private float health, damage, moveSpeed, attackTimer, projectileSpeed, attackMaxAngle;
@@ -13,7 +15,7 @@ public class Boss : MonoBehaviour
 
     private Rigidbody2D rb;
     private float attackTimerCurrent;
-    private float xMov, yMov, cooldown, timeSinceLastChange;
+    private float xMov, yMov, cooldown, timeSinceLastChange, wanderDuration;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,9 @@ public class Boss : MonoBehaviour
         attackTimerCurrent = 0f;
         cooldown = Random.Range(3f, 5f);
         timeSinceLastChange = cooldown;
+        wanderDuration = Random.Range(1.5f, 3f);
+
+        PickNewDirection();
 
         if(numberOfProjectilesPerAttack % 2 == 0) {
             numberOfProjectilesPerAttack++;
@@ -49,32 +54,51 @@ public class Boss : MonoBehaviour
 
     public void Wander() {
         timeSinceLastChange += Time.deltaTime;
+        wanderDuration -= Time.deltaTime;
 
-        Vector2 mov = new Vector2(xMov, yMov).normalized;
-        rb.velocity = mov * moveSpeed;
+        if(wanderDuration > 0f) {
+            Vector2 mov = new Vector2(xMov, yMov).normalized;
+            rb.velocity = mov * moveSpeed;
+        }
 
         if(timeSinceLastChange >= cooldown) {
             PickNewDirection();
             timeSinceLastChange = 0;
             cooldown = Random.Range(3f, 5f);
+            wanderDuration = Random.Range(1.5f, 3f);
         }
     }
 
     public void PickNewDirection() {
         xMov = Random.Range(-1, 1);
         yMov = Random.Range(-1, 1);
+
+        spriteRenderer.flipX = xMov < 0f;
     }
 
     private void Fire() {
         Vector2 directionToPlayer = GameManager.instance.player.gameObject.transform.position - transform.position;
-        directionToPlayer.Normalize();
+        CreateProjectile(directionToPlayer);
 
-        Vector2 position = (Vector2)transform.position + directionToPlayer;
+        float angle = 30f;
+
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Vector3 newDirection = rotation * directionToPlayer;
+        CreateProjectile(newDirection);
+
+        Quaternion rotationNeg = Quaternion.AngleAxis(-angle, Vector3.forward);
+        Vector3 newDirectionNeg = rotationNeg * directionToPlayer;
+        CreateProjectile(newDirectionNeg);
+    }
+
+    private void CreateProjectile(Vector2 direction) {
+        direction.Normalize();
+        Vector2 position = (Vector2)transform.position + direction;
         GameObject projectile = Instantiate(bossProjectilePrefab, position, Quaternion.identity, GameManager.instance.projectilesParent);
         projectile.GetComponent<Projectile>().damage = damage;
-        Vector2 projectileForce = directionToPlayer * projectileSpeed;
+        Vector2 projectileForce = direction * projectileSpeed;
         projectile.GetComponent<Rigidbody2D>().velocity = projectileForce;
-        projectile.transform.right = directionToPlayer;
+        projectile.transform.right = direction;
     }
 
     private void TakeDamage(float damage) {

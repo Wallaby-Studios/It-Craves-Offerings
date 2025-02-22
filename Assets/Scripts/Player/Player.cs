@@ -124,7 +124,7 @@ public class Player : MonoBehaviour {
 
         UIManager.instance.UpdateStats();
 
-        if(currentHealth < 0) {
+        if(currentHealth <= 0) {
             GameManager.instance.ChangeGameState(GameState.GameEnd);
             Destroy(gameObject);
         }

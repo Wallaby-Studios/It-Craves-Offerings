@@ -151,7 +151,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.22}
+  m_Offset: {x: 0, y: -0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -162,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.01, y: 1.41}
+  m_Size: {x: 1.41, y: 1.65}
   m_EdgeRadius: 0
 --- !u!50 &7925007872331648169
 Rigidbody2D:
@@ -203,10 +203,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05961fee14b146e418b05de0da1c7615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 2597433939825656800}
   bossProjectilePrefab: {fileID: 5352159123890656705, guid: 8ef2f54d7cfe9be4aa1eacc0aedc3d25, type: 3}
   health: 50
   damage: 5
-  moveSpeed: 1
+  moveSpeed: 0.25
   attackTimer: 5
   projectileSpeed: 5
   attackMaxAngle: 60
