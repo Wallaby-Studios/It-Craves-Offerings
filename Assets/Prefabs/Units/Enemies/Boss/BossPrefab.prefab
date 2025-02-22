@@ -218,6 +218,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2335c31f575f09845a8c9c4ad769b583, type: 3}
   - {fileID: 8300000, guid: 16a579069ced64246b7df211f52c355b, type: 3}
   deathSound: {fileID: 8300000, guid: 0c07c63683530ca41b0d462672cd8e3f, type: 3}
+  throwAwaySfx: {fileID: 516404303638898372, guid: af6049b78603a8a48940c1a9caa4670a, type: 3}
 --- !u!82 &1773842573612062088
 AudioSource:
   m_ObjectHideFlags: 0

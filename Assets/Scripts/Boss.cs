@@ -19,6 +19,7 @@ public class Boss : MonoBehaviour
     public List<AudioClip> audioClipList = new List<AudioClip>();
     public AudioClip deathSound;
     AudioSource audio;
+    public GameObject throwAwaySfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -116,8 +117,7 @@ public class Boss : MonoBehaviour
 
         }
         if(health <= 0f) {
-            audio.clip = deathSound;
-            audio.Play();
+            GameObject s = Instantiate(throwAwaySfx);
             // If the boss is killed, move the game to the GameEnd State
             Destroy(gameObject);
             GameManager.instance.ChangeGameState(GameState.GameEnd);
