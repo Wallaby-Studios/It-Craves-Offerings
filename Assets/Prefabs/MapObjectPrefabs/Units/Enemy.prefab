@@ -491,6 +491,7 @@ MonoBehaviour:
   strafingAttackCooldown: 2
   stationaryTimeBetweenShots: 0.3
   deathSound: {fileID: 4907005523202578207, guid: 8b23d943698561e4598fe77e366e3ba9, type: 3}
+  gruntSound: {fileID: 8438322129619125562, guid: 42a0a970b292f7046846b83b9c6085fa, type: 3}
 --- !u!82 &1248832207522214679
 AudioSource:
   m_ObjectHideFlags: 0
