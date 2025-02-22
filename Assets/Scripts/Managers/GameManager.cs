@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
                 if(player != null) {
                     Destroy(player.gameObject);
                 }
+                ClearProjectiles();
                 break;
             case GameState.Game:
                 GameObject playerObject = Instantiate(playerPrefab, RoomManager.instance.PlayerSpawnPosition.position, Quaternion.identity, unitsParent);
