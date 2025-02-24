@@ -20,9 +20,9 @@ public class EnemyShooting : MonoBehaviour
         int i = Random.Range(0, firingSounds.Count - 1);
         audio.clip = firingSounds[i];
         audio.Play();
-        GameObject g = Instantiate(bulletPrefab);
         Vector3 recoilOffset = new Vector3(Random.Range(-.2f, .2f), Random.Range(-.2f, .2f), 0);
-        g.transform.position = spawner.transform.position + recoilOffset;
+        Vector2 position = spawner.transform.position + recoilOffset;
+        GameObject g = Instantiate(bulletPrefab, position, Quaternion.identity, GameManager.instance.projectilesParent);
         g.transform.right = transform.up;
         g.GetComponent<Rigidbody2D>().AddForce(g.transform.right * bulletForce);
     }

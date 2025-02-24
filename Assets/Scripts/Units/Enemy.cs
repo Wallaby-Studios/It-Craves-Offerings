@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
     //for dir changs on Wander state
     private float timeSinceLastChange, cooldown;
 
-
     //Attack Variables
     [Header("Attack Fields")]
     public float strafingAttackCooldown = 2f;
@@ -58,8 +57,6 @@ public class Enemy : MonoBehaviour
         timeSinceLastChange = cooldown;
         eShooting = GetComponentInChildren<EnemyShooting>();
         timeSinceLastStrafingAttack = 0;
-        
-
     }
 
     // Update is called once per frame
@@ -95,8 +92,6 @@ public class Enemy : MonoBehaviour
                 timeSinceLastStrafingAttack = 0;
                 strafingAttackCooldown = Random.Range(1.5f, 3);
             }
-            
-           
         }
     }
 
@@ -113,8 +108,6 @@ public class Enemy : MonoBehaviour
             timeSinceLastChange = 0;
             cooldown = Random.Range(1.5f, 2f);
         }
-
-       
     }
 
     public void RushAtTarget()
