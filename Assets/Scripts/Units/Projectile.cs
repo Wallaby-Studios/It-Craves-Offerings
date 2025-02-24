@@ -8,10 +8,15 @@ public class Projectile : MonoBehaviour
     public float damage;
     public GameObject impactParticle;
     public PlayerWeaponSFX audio;
+
+    private void Awake() {
+        audio = GameManager.instance.PlayerWeaponSFX;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        audio = FindObjectOfType<PlayerWeaponSFX>();
+
     }
 
     // Update is called once per frame
@@ -22,10 +27,11 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.collider != null) {
+            Debug.Log(collision.gameObject.name);
+
             if(collision.gameObject.tag == "Player") {
                 collision.gameObject.GetComponent<Player>().TakeDamage(damage);
                 audio.FleshHit();
-                
             }
             audio.WallHit();
             GameObject p = Instantiate(impactParticle);

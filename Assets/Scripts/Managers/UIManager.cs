@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
                 gameUIParent.SetActive(true);
                 gameEndUIParent.SetActive(false);
                 UpdateStats();
-                UpdateBossCountdownText(RoomManager.instance.RoomsBeforeBossRoom);
+                UpdateBossCountdownText(RoomManager.instance.CurrentRoomIndex, RoomManager.instance.BossRoomIndex);
                 break;
             case GameState.GameEnd:
                 mainMenuUIParent.SetActive(false);
@@ -74,20 +74,17 @@ public class UIManager : MonoBehaviour
         gameEndToMainMenuButton.onClick.AddListener(() => GameManager.instance.ChangeGameState(GameState.MainMenu));
     }
 
-    public void UpdateBossCountdownText(int roomsUntilBossRoom) {
-        if(roomsUntilBossRoom <= 5 && roomsUntilBossRoom > 0) {
+    public void UpdateBossCountdownText(int currentRoomIndex, int bossRoomIndex) {
+        if(bossRoomIndex - currentRoomIndex <= 5 && currentRoomIndex != bossRoomIndex) {
             string roomText;
-
-            if(roomsUntilBossRoom == 1) {
-                roomText = "1 Room";
-            } else if(roomsUntilBossRoom > 1) {
-                roomText = string.Format("{0} Rooms", roomsUntilBossRoom);
+            if(currentRoomIndex == bossRoomIndex - 1) {
+                roomText = "Prepare for Boss";
             } else {
-                roomText = "# Rooms";
+                roomText = string.Format("{0} Rooms until Boss", bossRoomIndex - currentRoomIndex - 1);
             }
 
             bossCountdownText.gameObject.SetActive(true);
-            bossCountdownText.text = string.Format("{0} until Boss", roomText);
+            bossCountdownText.text = roomText;
         } else {
             bossCountdownText.gameObject.SetActive(false);
         }

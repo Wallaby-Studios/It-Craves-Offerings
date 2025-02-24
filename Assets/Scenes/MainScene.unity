@@ -2300,6 +2300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3780183986308977357, guid: 7a44ee491312a5b4abc4ff2805dd4579, type: 3}
+  playerWeaponSFX: {fileID: 30992244}
   player: {fileID: 0}
   unitsParent: {fileID: 1939263748}
   projectilesParent: {fileID: 422187852}

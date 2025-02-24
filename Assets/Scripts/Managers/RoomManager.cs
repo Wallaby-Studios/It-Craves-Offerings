@@ -47,8 +47,8 @@ public class RoomManager : MonoBehaviour {
     private Sprite healthSprite, damageSprite, moveSpeedSprite, attackSpeedSprite, projectileSpeedSprite;
 
     private RoomType currentRoomType;
-    private int currentRoomCount;
-    private int roomsBeforeBossRoom;
+    private int currentRoomIndex;
+    private int bossRoomIndex;
 
     private Dictionary<UpgradeTier, int> tierSoulCostMap;
     private Dictionary<UpgradeTier, (float, float)> tierStatAmountMap;
@@ -56,8 +56,8 @@ public class RoomManager : MonoBehaviour {
 
     public Transform PlayerSpawnPosition { get { return playerSpawnPosition; } }
     public RoomType CurrentRoomType { get { return currentRoomType; } }
-    public int CurrentRoomCount { get { return currentRoomCount; } }
-    public int RoomsBeforeBossRoom { get { return roomsBeforeBossRoom; } }
+    public int CurrentRoomIndex { get { return currentRoomIndex; } }
+    public int BossRoomIndex { get { return bossRoomIndex; } }
     public Dictionary<UpgradeTier, int> TierSoulCostMap { get { return tierSoulCostMap; } }
     public Dictionary<UpgradeTier, (float, float)> TierStatAmountMap { get { return tierStatAmountMap; } }
     public Dictionary<Stat, Sprite> StatSpriteMap { get { return statSpriteMap; } }
@@ -68,8 +68,8 @@ public class RoomManager : MonoBehaviour {
 
     public void GameSetup() {
         currentRoomType = RoomType.Combat;
-        currentRoomCount = 0;
-        roomsBeforeBossRoom = 10;
+        currentRoomIndex = 0;
+        bossRoomIndex = 2;
 
         ClearRoom();
         SetupDoors();
@@ -77,13 +77,12 @@ public class RoomManager : MonoBehaviour {
 
     public void ChangeRooms(RoomType newRoomType) {
         currentRoomType = newRoomType;
-        currentRoomCount++;
+        currentRoomIndex++;
         GameManager.instance.player.transform.position = playerSpawnPosition.position;
 
         ClearRoom();
         SetupDoors();
         GameManager.instance.ClearProjectiles();
-        UIManager.instance.UpdateBossCountdownText(roomsBeforeBossRoom - currentRoomCount);
 
         // Spawn in units or pickups based on the new room type
         switch(currentRoomType) {
@@ -117,43 +116,38 @@ public class RoomManager : MonoBehaviour {
 
     private void SetupDoors() {
         // Setup Non-Boss Doors (Healing, Combat, and Upgrade Doors)
-        if(currentRoomCount == 0) {
-            // For the first room, unlock all doors
-            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
-                doorTilemap.SetActive(true);
+        if(currentRoomIndex == bossRoomIndex) {
+            // For the boss room, hide all doors
+            foreach(GameObject openDoorTilemap in nonBossDoorsOpenTilemaps) {
+                openDoorTilemap.SetActive(false);
             }
-            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
-                doorTilemap.SetActive(false);
+            foreach(GameObject closedDoorTilemap in nonBossDoorsClosedTilemaps) {
+                closedDoorTilemap.SetActive(false);
             }
-        } else if(currentRoomCount < roomsBeforeBossRoom - 1) {
-            // For any room before the 8th room, show all doors and lock them if the current room is a combat room
-            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
-                doorTilemap.SetActive(currentRoomType != RoomType.Combat);
+        } else if(currentRoomIndex == bossRoomIndex - 1) {
+            // For the room immediately before the boss room, hide all non-boss doors 
+            foreach(GameObject openDoorTilemap in nonBossDoorsOpenTilemaps) {
+                openDoorTilemap.SetActive(false);
             }
-            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
-                doorTilemap.SetActive(currentRoomType == RoomType.Combat);
-            }
-        } else if(currentRoomCount == roomsBeforeBossRoom - 1) {
-            // For the 9th room, hide all non-boss doors 
-            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
-                doorTilemap.SetActive(false);
-            }
-            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
-                doorTilemap.SetActive(false);
+            foreach(GameObject closedDoorTilemap in nonBossDoorsClosedTilemaps) {
+                closedDoorTilemap.SetActive(false);
             }
         } else {
-            // For the 10th room, hide all doors
-            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
-                doorTilemap.SetActive(false);
+            // For any room before the last room before the boss room, show all non-boss doors and lock them if the current room is a combat room
+            foreach(GameObject openDoorTilemap in nonBossDoorsOpenTilemaps) {
+                openDoorTilemap.SetActive(currentRoomType != RoomType.Combat);
             }
-            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
-                doorTilemap.SetActive(false);
+            foreach(GameObject closedDoorTilemap in nonBossDoorsClosedTilemaps) {
+                closedDoorTilemap.SetActive(currentRoomType == RoomType.Combat);
             }
+
+            // Determine if the doors should be open, based on if there are enemies
+            CombatRoomCleared();
         }
 
         // Setup Boss Door
-        if(currentRoomCount == roomsBeforeBossRoom - 1) {
-            // Show the boss door and lock it only if the 9th room is a combat room
+        if(currentRoomIndex == bossRoomIndex - 1) {
+            // Show the boss door and lock it only if the room before the boss room is a combat room
             bossDoorOpenTilemap.SetActive(currentRoomType != RoomType.Combat);
             bossDoorClosedTilemap.SetActive(currentRoomType == RoomType.Combat);
         } else {
@@ -163,8 +157,11 @@ public class RoomManager : MonoBehaviour {
         }
 
         // Show the correct walls
-        nonBossRoomWalls.SetActive(roomsBeforeBossRoom - currentRoomCount > 0);
-        bossRoomWalls.SetActive(roomsBeforeBossRoom - currentRoomCount == 0);
+        nonBossRoomWalls.SetActive(currentRoomIndex < bossRoomIndex);
+        bossRoomWalls.SetActive(currentRoomIndex == bossRoomIndex);
+
+        // Update Room Text
+        UIManager.instance.UpdateBossCountdownText(currentRoomIndex, bossRoomIndex);
     }
 
     #region Combat Room Methods
@@ -174,16 +171,16 @@ public class RoomManager : MonoBehaviour {
             return;
         }
 
-        if(currentRoomCount < roomsBeforeBossRoom - 1) {
+        if(currentRoomIndex < bossRoomIndex - 1) {
             // Unlock all (normal) doors
-            foreach(GameObject doorTilemap in nonBossDoorsOpenTilemaps) {
-                doorTilemap.SetActive(true);
+            foreach(GameObject openDoorTilemap in nonBossDoorsOpenTilemaps) {
+                openDoorTilemap.SetActive(true);
             }
-            foreach(GameObject doorTilemap in nonBossDoorsClosedTilemaps) {
-                doorTilemap.SetActive(false);
+            foreach(GameObject closedDoorTilemap in nonBossDoorsClosedTilemaps) {
+                closedDoorTilemap.SetActive(false);
             }
 
-        } else if(currentRoomCount == roomsBeforeBossRoom - 1) {
+        } else if(currentRoomIndex == bossRoomIndex - 1) {
             // Unlock the boss door
             bossDoorOpenTilemap.SetActive(true);
             bossDoorClosedTilemap.SetActive(false);

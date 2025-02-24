@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject playerPrefab;
 
+    [SerializeField]
+    private PlayerWeaponSFX playerWeaponSFX;
+
     public Player player;
     public Transform unitsParent;
     public Transform projectilesParent;
@@ -38,6 +41,7 @@ public class GameManager : MonoBehaviour
     private GameState currentGameState;
 
     public GameState CurrentGameState { get { return currentGameState; } }
+    public PlayerWeaponSFX PlayerWeaponSFX { get { return playerWeaponSFX; } }
 
     // Start is called before the first frame update
     void Start()
