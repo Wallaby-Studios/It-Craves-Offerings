@@ -40,15 +40,6 @@ public class EnemyManager : MonoBehaviour
         enemyMap = new Dictionary<EnemyType, GameObject>();
     }
 
-    public List<GameObject> SpawnEnemy(EnemyType enemyType, int count) {
-        // Spawn in a specified number (count) of enemies and return them in a list
-        List<GameObject> enemies = new List<GameObject>();
-        for(int i = 0; i < count; i++) {
-            enemies.Add(SpawnRandomEnemy());
-        }
-        return enemies;
-    }
-
     public GameObject SpawnRandomEnemy() {
         GameObject randomEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
         // Spawn the enemy into the scene
