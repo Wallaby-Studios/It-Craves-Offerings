@@ -18,12 +18,13 @@ public class Boss : MonoBehaviour
     private float xMov, yMov, cooldown, timeSinceLastChange, wanderDuration;
     public List<AudioClip> audioClipList = new List<AudioClip>();
     public AudioClip deathSound;
-    AudioSource audio;
+    AudioSource audioSource;
     public GameObject throwAwaySfx;
+
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();    
+        audioSource = GetComponent<AudioSource>();    
         rb = GetComponent<Rigidbody2D>();
         attackTimerCurrent = 0f;
         cooldown = Random.Range(3f, 5f);
@@ -112,9 +113,8 @@ public class Boss : MonoBehaviour
         if (r > 16)
         {
             int j = Random.Range(0, audioClipList.Count - 1);
-            audio.clip = audioClipList[j];
-            audio.Play();
-
+            audioSource.clip = audioClipList[j];
+            audioSource.Play();
         }
         if(health <= 0f) {
             GameObject s = Instantiate(throwAwaySfx);

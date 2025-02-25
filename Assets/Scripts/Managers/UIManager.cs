@@ -75,6 +75,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void UpdateBossCountdownText(int currentRoomIndex, int bossRoomIndex) {
+        // Display text if the boss room is within 5 rooms AND the current room is NOT a boss room
         if(bossRoomIndex - currentRoomIndex <= 5 && currentRoomIndex != bossRoomIndex) {
             string roomText;
             if(currentRoomIndex == bossRoomIndex - 1) {

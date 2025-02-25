@@ -7,17 +7,17 @@ public class Projectile : MonoBehaviour
 {
     public float damage;
     public GameObject impactParticle;
-    public PlayerWeaponSFX audio;
+    public PlayerWeaponSFX audioSource;
 
     private void Awake() {
-        audio = GameManager.instance.PlayerWeaponSFX;
+        audioSource = GameManager.instance.PlayerWeaponSFX;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.collider != null) {
             if(collision.gameObject.tag == "Player") {
                 collision.gameObject.GetComponent<Player>().TakeDamage(damage);
-                audio.FleshHit();
+                audioSource.FleshHit();
             }
             
             if(gameObject.layer == 10) {
@@ -25,13 +25,13 @@ public class Projectile : MonoBehaviour
                 // destroy the boss projectile if it collides with
                 // another collider that is NOT a basic projectile
                 if(collision.gameObject.layer != 8) {
-                    audio.WallHit();
+                    audioSource.WallHit();
                     ProjectileImpact(collision);
                     Destroy(gameObject);
                 }
             } else {
                 // If the projectile is a normal projectile
-                audio.WallHit();
+                audioSource.WallHit();
                 ProjectileImpact(collision);
                 Destroy(gameObject);
             }

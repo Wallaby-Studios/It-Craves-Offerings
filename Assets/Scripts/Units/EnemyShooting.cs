@@ -8,18 +8,18 @@ public class EnemyShooting : MonoBehaviour
     public GameObject spawner;
     public GameObject bulletPrefab;
     public float bulletForce;
-    AudioSource audio;
+    AudioSource audioSource;
     public List<AudioClip> firingSounds = new List<AudioClip>();
     // Start is called before the first frame update
     private void Start()
     {
-        audio = GetComponent<AudioSource>();    
+        audioSource = GetComponent<AudioSource>();    
     }
     public void PerformAttack()
     {
         int i = Random.Range(0, firingSounds.Count - 1);
-        audio.clip = firingSounds[i];
-        audio.Play();
+        audioSource.clip = firingSounds[i];
+        audioSource.Play();
         Vector3 recoilOffset = new Vector3(Random.Range(-.2f, .2f), Random.Range(-.2f, .2f), 0);
         Vector2 position = spawner.transform.position + recoilOffset;
         GameObject g = Instantiate(bulletPrefab, position, Quaternion.identity, GameManager.instance.projectilesParent);

@@ -14,7 +14,7 @@ public class Fade : MonoBehaviour
         float r = color.r;
         float g = color.g;
         float b = color.b;
-        float alpha = 255;
+        //float alpha = 255;
     }
 
     // Update is called once per frame

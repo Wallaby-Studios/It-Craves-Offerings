@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
     private float tempSpriteTimerCurrent;
 
     private Vector2 moveDirection, lookPosition;
-    AudioSource audio;
+    AudioSource audioSource;
     public AudioClip fleshHit;
     public Dictionary<Stat, float> Stats { get { return stats; } }
     public float CurrentHealth { get { return currentHealth; } }
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
     public List<AudioClip> castSFX = new List<AudioClip>();
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -109,8 +109,8 @@ public class Player : MonoBehaviour {
             projectile.GetComponent<Rigidbody2D>().AddForce(projectileForce);
             projectile.transform.right = playerAim.transform.up;
             int choice = Random.Range(0, castSFX.Count - 1);
-            audio.clip = castSFX[choice];
-            audio.Play();
+            audioSource.clip = castSFX[choice];
+            audioSource.Play();
         }
     }
 
@@ -118,8 +118,8 @@ public class Player : MonoBehaviour {
         if(amount < 0) {
             return;
         }
-        audio.clip = fleshHit;
-        audio.Play();
+        audioSource.clip = fleshHit;
+        audioSource.Play();
         currentHealth -= amount;
 
         UIManager.instance.UpdateStats();

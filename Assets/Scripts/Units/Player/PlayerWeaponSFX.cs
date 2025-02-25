@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerWeaponSFX : MonoBehaviour
 {
-    AudioSource audio;
+    AudioSource audioSource;
     public List<AudioClip> sounds = new List<AudioClip>();
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,14 +20,14 @@ public class PlayerWeaponSFX : MonoBehaviour
 
     public void WallHit()
     {
-        audio.clip = sounds[0];
-        audio.Play();
+        audioSource.clip = sounds[0];
+        audioSource.Play();
     }
 
     public void FleshHit()
     {
-        audio.clip = sounds[1];
-        audio.Play();
+        audioSource.clip = sounds[1];
+        audioSource.Play();
     }
 
 }
