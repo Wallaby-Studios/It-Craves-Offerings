@@ -69,7 +69,7 @@ public class RoomManager : MonoBehaviour {
     public void GameSetup() {
         currentRoomType = RoomType.Combat;
         currentRoomIndex = 0;
-        bossRoomIndex = 2;
+        bossRoomIndex = 10;
 
         ClearRoom();
         SetupDoors();
