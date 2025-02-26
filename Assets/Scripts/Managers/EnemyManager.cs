@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EnemyType {
-    Ranged
+    Rusher,
+    Blaster,
+    Strafer,
+    Sniper,
 }
 
 public class EnemyManager : MonoBehaviour
@@ -26,28 +29,47 @@ public class EnemyManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    private Transform enemyParentTransform, enemySpawnTransform;
+    private Transform enemyParentTransform, enemySpawnAreaTransform;
     [SerializeField]
-    private List<GameObject> enemyPrefabs;
-    [SerializeField]
-    private GameObject bossPrefab;
+    private GameObject rusherPrefab, blasterPrefab, straferPrefab, sniperPrefab, bossPrefab;
 
     private Dictionary<EnemyType, GameObject> enemyMap;
+    private KeyValuePair<Vector2, Vector2> enemySpawnArea;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyMap = new Dictionary<EnemyType, GameObject>();
+        enemyMap.Add(EnemyType.Rusher, rusherPrefab);
+        enemyMap.Add(EnemyType.Blaster, blasterPrefab);
+        enemyMap.Add(EnemyType.Strafer, straferPrefab);
+        enemyMap.Add(EnemyType.Sniper, sniperPrefab);
+
+        Vector2 minPos = new Vector2(
+            enemySpawnAreaTransform.position.x - enemySpawnAreaTransform.localScale.x / 2,
+            enemySpawnAreaTransform.position.y - enemySpawnAreaTransform.localScale.y / 2);
+        Vector2 maxPos = new Vector2(
+            enemySpawnAreaTransform.position.x + enemySpawnAreaTransform.localScale.x / 2,
+            enemySpawnAreaTransform.position.y + enemySpawnAreaTransform.localScale.y / 2);
+        enemySpawnArea = new KeyValuePair<Vector2, Vector2>(minPos, maxPos);
     }
 
     public GameObject SpawnRandomEnemy() {
-        GameObject randomEnemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+        List<EnemyType> types = new List<EnemyType>(enemyMap.Keys);
+        EnemyType randomEnemyType = types[Random.Range(0, types.Count)];
+        return SpawnEnemy(randomEnemyType);
+    }
+
+    public GameObject SpawnEnemy(EnemyType enemyType) {
+        Vector2 randomPosition = new Vector2(
+            Random.Range(enemySpawnArea.Key.x, enemySpawnArea.Value.x),
+            Random.Range(enemySpawnArea.Key.y, enemySpawnArea.Value.y));
         // Spawn the enemy into the scene
-        return Instantiate(randomEnemyPrefab, enemySpawnTransform.position, Quaternion.identity, enemyParentTransform);
+        return Instantiate(enemyMap[enemyType], randomPosition, Quaternion.identity, enemyParentTransform);
     }
 
     public GameObject SpawnBoss() {
-        return Instantiate(bossPrefab, enemySpawnTransform.position, Quaternion.identity, enemyParentTransform);
+        return Instantiate(bossPrefab, enemySpawnAreaTransform.position, Quaternion.identity, enemyParentTransform);
     }
 
     public void CheckForRemainingEnemies() {

@@ -73,6 +73,7 @@ public class RoomManager : MonoBehaviour {
 
         ClearRoom();
         SetupDoors();
+        EnemyManager.instance.CheckForRemainingEnemies();
     }
 
     public void ChangeRooms(RoomType newRoomType) {
@@ -140,9 +141,6 @@ public class RoomManager : MonoBehaviour {
             foreach(GameObject closedDoorTilemap in nonBossDoorsClosedTilemaps) {
                 closedDoorTilemap.SetActive(currentRoomType == RoomType.Combat);
             }
-
-            // Determine if the doors should be open, based on if there are enemies
-            CombatRoomCleared();
         }
 
         // Setup Boss Door
