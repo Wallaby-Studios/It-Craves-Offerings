@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: bafb210e1c0c8a64984497a7729f3820, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1cea307408e64b845860d38bc20fd487, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 5997144959818289433}
-  bulletPrefab: {fileID: 5352159123890656705, guid: 520221475b4401b4d9ffdcd6ac9aac12, type: 3}
+  bulletPrefab: {fileID: 5352159123890656705, guid: 78530ec5d7bd7a7449ef7ea7f9950e5a, type: 3}
   bulletForce: 100
   firingSounds:
   - {fileID: 8300000, guid: 7ebd2d949b1fa8c4689dae7036021151, type: 3}
@@ -354,7 +354,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.5019608, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.6039216, g: 0.34117648, b: 0.15686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -373,12 +373,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6900693118707711762}
-  - component: {fileID: 4298721923391417133}
+  - component: {fileID: 3150808551761851236}
   - component: {fileID: 7925007872331648169}
   - component: {fileID: 7565119856473259442}
   - component: {fileID: 1248832207522214679}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: EnemyRusherPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -400,7 +400,7 @@ Transform:
   - {fileID: 6777281233799491841}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &4298721923391417133
+--- !u!58 &3150808551761851236
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

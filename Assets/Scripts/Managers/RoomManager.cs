@@ -88,7 +88,13 @@ public class RoomManager : MonoBehaviour {
         // Spawn in units or pickups based on the new room type
         switch(currentRoomType) {
             case RoomType.Combat:
-                EnemyManager.instance.SpawnRandomEnemy();
+                // Calculate the enemies to spawn based on the current room index
+                // Equation: Floor(SquareRoot(2 * room index))
+                // Starts at 1 enemy, becomes 2 enemies for most middle floors, becomes 3 enemies in the later rooms
+                int enemyCountToSpawn = Mathf.FloorToInt(Mathf.Sqrt(2f * currentRoomIndex));
+                for(int i = 0; i < enemyCountToSpawn; i++) {
+                    EnemyManager.instance.SpawnRandomEnemy();
+                }
                 break;
             case RoomType.Heal:
                 // Spawn a health pickup if the new room is a healing room

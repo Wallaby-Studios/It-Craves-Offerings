@@ -43,7 +43,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start() 
     {
-        health = RoomManager.instance.CurrentRoomIndex * 2;
         rb = GetComponent<Rigidbody2D>();
         target = GameManager.instance.player.transform;
         moveSpeed = Random.Range(1, 2);
