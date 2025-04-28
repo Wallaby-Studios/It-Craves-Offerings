@@ -1,4 +1,4 @@
-# ScreamJam2025
+# It Craves Offerings
 
 ## Credits
 
